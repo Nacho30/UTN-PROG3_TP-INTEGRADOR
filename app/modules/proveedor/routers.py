@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, status
 from . import schemas, services
 
@@ -15,3 +17,9 @@ def alta_proveedor(proveedor: schemas.ProveedorCreate):
     # 422 automático si falla RN-01 / RN-03 (Pydantic)
     # 409 si el código ya existe (RN-02, validado en services)
     return services.crear(proveedor)
+
+
+@router.get("/", response_model=List[schemas.ProveedorRead])
+def listar_proveedores():
+    """Devuelve los proveedores disponibles para la interfaz de administración."""
+    return services.db_proveedores

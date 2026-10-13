@@ -12,6 +12,19 @@ fastapi dev app/main.py
 
 Documentación interactiva: http://localhost:8000/docs
 
+## Ejercicio 2 · Interfaz de proveedores
+
+La pantalla estática se sirve desde la misma aplicación en
+http://localhost:8000/ui/. Está construida únicamente con HTML, CSS y JavaScript
+nativos, sin frameworks, CDNs ni imágenes. El CSS externo reutiliza clases para
+tarjetas, botones, mensajes y campos, usa Grid/Flexbox y conserva el foco visible.
+La tabla tiene desplazamiento propio cuando el ancho es reducido, por lo que la
+página no requiere desplazamiento horizontal a 320 px.
+
+La interfaz consulta `GET /proveedores/` al abrir y envía el formulario a
+`POST /proveedores/`. Los mensajes de validación y de error se muestran en texto.
+Para probarla, ejecutar `fastapi dev app/main.py` y abrir la URL de la interfaz.
+
 ## Ejercicio 1 · HU-01: Registrar un proveedor
 
 `app/modules/proveedor/` sigue el mismo patrón que Categoría y Producto:
