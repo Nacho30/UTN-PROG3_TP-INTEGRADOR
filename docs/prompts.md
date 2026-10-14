@@ -112,3 +112,17 @@ antes de publicarla.
 
 **Estructura del prompt:** Rol → Contexto → Modo de trabajo → Tarea → Requisitos
 → Restricciones → Entregables → Entrega.
+
+---
+
+## TPI Frontend · Ejercicio 3: Datos locales, catálogo y filtro
+
+```text
+me ayudas por favor a hacer el punto 3 de este trabajo, tenés los permisos si
+necesitas instalar o correr lo que sea necesario y sube los cambios a este
+repositorio cuando esté todo terminado por favor
+```
+
+Se adjuntó la consigna «TPI: frontend de una librería». Como el repositorio
+contenía el TP backend, se acordó crear el frontend en una carpeta nueva
+(`frontend-libreria/`) sin modificar la API ni `app/static/`.

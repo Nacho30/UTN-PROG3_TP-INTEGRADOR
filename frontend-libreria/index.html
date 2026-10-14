@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Catálogo de la librería Páginas del Sol con búsqueda por título." />
+    <title>Catálogo | Librería Páginas del Sol</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Orden importante: primero los datos, luego la lógica que los usa. -->
+    <script src="js/datos.js" defer></script>
+    <script src="js/catalogo.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">PS</span>
+          <span>Librería Páginas del Sol</span>
+        </a>
+        <nav aria-label="Navegación principal">
+          <ul class="nav-list">
+            <li><a class="nav-link" href="#catalogo" aria-current="page">Catálogo</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido" class="container page">
+      <section id="catalogo" aria-labelledby="catalogo-titulo">
+        <div class="section-heading">
+          <p class="eyebrow">Nuestros libros</p>
+          <h1 id="catalogo-titulo">Catálogo</h1>
+        </div>
+
+        <form id="buscador-form" class="card search" role="search">
+          <label class="search__label" for="busqueda-titulo">Buscar por título</label>
+          <div class="search__controls">
+            <input
+              id="busqueda-titulo"
+              class="input"
+              name="busqueda"
+              type="search"
+              autocomplete="off"
+              placeholder="Ej.: viento"
+              aria-describedby="busqueda-ayuda"
+            />
+            <button class="button button--primary" type="submit">Buscar libros</button>
+            <button id="limpiar-busqueda" class="button button--secondary" type="button">Mostrar todo el catálogo</button>
+          </div>
+          <p id="busqueda-ayuda" class="help">
+            Se buscan coincidencias parciales sin distinguir mayúsculas de minúsculas.
+          </p>
+        </form>
+
+        <p id="catalogo-mensaje" class="message" role="status" aria-live="polite"></p>
+
+        <ul id="catalogo-lista" class="book-grid" aria-label="Libros del catálogo"></ul>
+
+        <noscript>
+          <p class="message message--warning">
+            El catálogo se genera con JavaScript. Activalo en el navegador para verlo.
+          </p>
+        </noscript>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">Librería Páginas del Sol · Datos ficticios con fines de práctica</div>
+    </footer>
+  </body>
+</html>

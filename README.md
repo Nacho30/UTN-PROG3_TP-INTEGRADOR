@@ -12,6 +12,12 @@ fastapi dev app/main.py
 
 Documentación interactiva: http://localhost:8000/docs
 
+## TPI · Frontend de la librería
+
+El frontend de la librería (consigna de HTML, CSS y JavaScript) está en
+[`frontend-libreria/`](frontend-libreria/README.md). Es independiente de la API:
+se abre con doble clic en `frontend-libreria/index.html`, sin servidor.
+
 ## Ejercicio 2 · Interfaz de proveedores
 
 La pantalla estática se sirve desde la misma aplicación en
