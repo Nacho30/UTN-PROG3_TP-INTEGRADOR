@@ -62,7 +62,8 @@ h3 {
 /* Foco visible para todos los controles navegables con teclado. */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+select:focus-visible {
   outline: 3px solid var(--color-foco);
   outline-offset: 2px;
 }
@@ -340,6 +341,109 @@ input:focus-visible {
   color: var(--color-texto-suave);
 }
 
+/* ---------- Formularios de alta (Ejercicio 4) ---------- */
+.form-alta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-3);
+}
+
+.form-campo {
+  display: grid;
+  gap: var(--espacio-1);
+  min-width: 0;
+}
+
+.form-campo__label {
+  font-weight: 700;
+}
+
+.campo-ancho {
+  grid-column: 1 / -1;
+}
+
+.autores-fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: var(--espacio-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.autores-fieldset legend {
+  padding-inline: var(--espacio-2);
+  font-weight: 700;
+}
+
+.check-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-3);
+  margin: var(--espacio-1) 0 0;
+  padding: 0;
+}
+
+.check-opcion {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-width: 0;
+}
+
+.form-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.lista-errores {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+/* ---------- Listados en tabla (Ejercicio 4) ---------- */
+.listado-titulo {
+  margin: var(--espacio-5) 0 var(--espacio-2);
+  font-size: 1.35rem;
+  color: var(--color-primario-oscuro);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.table th,
+.table td {
+  padding: var(--espacio-2) var(--espacio-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.table th {
+  background: #f4e9e3;
+  color: var(--color-primario-oscuro);
+  font-family: var(--fuente-titulos);
+  white-space: nowrap;
+}
+
+.table td {
+  overflow-wrap: anywhere;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 /* ---------- Pie ---------- */
 .site-footer {
   padding-block: var(--espacio-3);
@@ -350,11 +454,19 @@ input:focus-visible {
 
 /* Pantallas angostas (320 px): botones a ancho completo. */
 @media (max-width: 480px) {
-  .search__controls .button {
+  .search__controls .button,
+  .form-acciones .button {
     flex: 1 1 100%;
   }
 
   .card {
     padding: var(--espacio-3);
+  }
+}
+
+/* Pantallas anchas (1280 px): los campos del formulario en dos columnas. */
+@media (min-width: 900px) {
+  .form-alta {
+    grid-template-columns: 1fr 1fr;
   }
 }
