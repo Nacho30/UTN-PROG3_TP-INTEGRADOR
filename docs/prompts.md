@@ -48,28 +48,30 @@ Antes de subirlo, verificá que todos los casos de prueba devuelvan el código e
 
 ---
 
-## Ejercicio 2 · Presentación con CSS y uso adaptable
+## Ejercicio 2 · Presentación CSS local y adaptable
 
 ```text
 Rol: Actuá como orquestador técnico de un equipo de desarrollo.
 
 Contexto:
-El proyecto "API Integradora - Unidad 1" está desarrollado con FastAPI y
-cuenta con un módulo de Proveedores. El Ejercicio 2 requiere incorporar una
-interfaz de presentación para ese módulo utilizando únicamente HTML, CSS y
-JavaScript nativos, sin frameworks, librerías ni recursos externos.
+El proyecto es una librería estática que se abre directamente desde
+`index.html`. Sus recursos están en `css/` y `js/`; no usa servidor, backend,
+API, dependencias instaladas ni recursos externos. El Ejercicio 2 consiste en
+consolidar la presentación con CSS propio sin alterar las operaciones locales
+ni la persistencia existente en `localStorage`.
 
 Modo de trabajo:
-- Como orquestador, revisá la consigna y el estado actual del repositorio.
-- Delegá a un agente de implementación la creación de la interfaz y sus
-  verificaciones.
-- Integrá el resultado, comprobá que no se alteren los endpoints existentes
-  ni la documentación automática de FastAPI y registrá las decisiones tomadas.
+- Como orquestador, revisá la consigna, el cambio OpenSpec, el checkout y las
+  verificaciones existentes antes de editar.
+- Delegá a un agente la revisión o implementación puntual, con los requisitos
+  y límites comprobados.
+- Integrá el resultado y registrá sólo evidencia ejecutada; si no hay una
+  brecha visual, no modifiques el comportamiento de la aplicación.
 
 Tarea:
-Crear una interfaz local para gestionar proveedores, disponible desde `/ui/`,
-que consuma los endpoints del proyecto. Debe permitir cargar proveedores y
-mostrar el listado disponible.
+Aplicar y verificar una identidad visual propia para catálogo, formularios,
+mensajes y tablas de la librería. La página debe conservar sus cinco vistas:
+Catálogo, Libros, Clientes, Ventas e Historial.
 
 Requisitos de presentación y accesibilidad:
 - Definí una identidad visual propia, coherente y profesional mediante colores,
@@ -87,21 +89,25 @@ Requisitos de presentación y accesibilidad:
 
 Restricciones:
 - Usá exclusivamente HTML, CSS y JavaScript nativos incluidos localmente.
-- No uses CDN, Bootstrap, Tailwind, React ni otra librería o framework.
-- Conservá el comportamiento de `POST /proveedores/` y de `/docs`.
+- No uses CDN, Bootstrap, Tailwind, React, frameworks, `fetch`, API, backend,
+  llamadas de red ni recursos remotos.
+- Debe abrir correctamente con `file://`, sin requerir servidor.
+- Conservá las operaciones y la clave de `localStorage` existentes; no las
+  migres ni las reescribas por este ejercicio.
 - Mantené el código y los mensajes de la interfaz en español.
 
 Entregables:
-1. Interfaz en archivos locales dentro de `app/static/`.
-2. Configuración necesaria para servirla desde `/ui/`.
-3. Actualización del README con las instrucciones de uso.
-4. Verificación de recursos, sintaxis, comportamiento de API, foco, mensajes
-   de error y vistas de 320 px y 1280 px.
+1. CSS propio reutilizable en `css/styles.css` y HTML semántico en `index.html`.
+2. Uso de Flexbox o CSS Grid y tratamiento de tablas en contenedores con
+   desplazamiento local.
+3. Foco visible, mensajes textuales y navegación mediante teclado.
+4. Verificación de recursos locales, sintaxis, foco, mensajes y vistas de
+   320 px y 1280 px.
 
 Entrega:
-Realizá un único commit descriptivo en español y publicalo en la rama `main`
-del repositorio. Informá los archivos modificados, las verificaciones realizadas
-y cualquier requisito pendiente de permisos de GitHub.
+Dejá los cambios listos para revisión, sin crear servidor ni publicar nada.
+Informá los archivos modificados, las verificaciones realizadas y cualquier
+limitación real de la validación manual.
 ```
 
 **Metodología aplicada:** el trabajo se coordinó con un orquestador, encargado
