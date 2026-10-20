@@ -18,6 +18,28 @@ El frontend de la librería (consigna de HTML, CSS y JavaScript) está en
 [`frontend-libreria/`](frontend-libreria/README.md). Es independiente de la API:
 se abre con doble clic en `frontend-libreria/index.html`, sin servidor.
 
+### Ejercicios 3 a 6 · Frontend de la librería
+
+| Ejercicio | Implementación |
+|-----------|----------------|
+| 3 · Datos locales, catálogo y filtro | Catálogo generado desde datos locales, búsqueda por título sin distinguir mayúsculas/minúsculas y mensajes para búsquedas vacías o sin resultados. |
+| 4 · Altas de libros y clientes | Formularios accesibles con validación, prevención de duplicados, tablas actualizadas y nuevos identificadores. |
+| 5 · Venta simulada e historial | Borrador de venta, cálculo seguro en centavos, confirmación, detalle e historial de snapshots sin modificar ventas anteriores. |
+| 6 · Persistencia local | Libros, clientes y ventas se conservan en `localStorage` bajo la clave versionada `paginas-del-sol.estado.v1`, sin duplicar datos iniciales al recargar. |
+
+El Ejercicio 6 mantiene los precios históricos de cada venta aunque cambie el
+catálogo posterior. La persistencia depende del navegador, perfil y origen local:
+no usa backend, cuentas ni sincronización entre usuarios. Para reiniciar los datos
+de la librería, eliminar esa clave en el almacenamiento del navegador y recargar.
+
+La documentación funcional, los casos manuales y las pruebas de cada ejercicio
+están detallados en el [README del frontend](frontend-libreria/README.md). Para
+ejecutar la suite automatizada disponible desde la raíz del repositorio:
+
+```powershell
+node --test frontend-libreria/tests
+```
+
 ## Ejercicio 2 · Interfaz de proveedores
 
 La pantalla estática se sirve desde la misma aplicación en
