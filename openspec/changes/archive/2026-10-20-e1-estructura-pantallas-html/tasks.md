@@ -1,8 +1,9 @@
 # Tasks
 
 Cambio retroactivo: el Ejercicio 1 ya estaba implementado dentro de E3–E5.
-Cada tarea es una verificación sobre el código existente; los resultados reales
-están en `validation.md`. No se modificó código de producción.
+Las tareas 1, 2 y 4 son verificaciones sobre el código existente; la tarea 3
+reorganiza el repositorio (sin cambiar el código de las vistas). Los resultados
+reales están en `validation.md`.
 
 ## 1. Vistas y navegación
 
@@ -15,7 +16,12 @@ están en `validation.md`. No se modificó código de producción.
 - [x] 2.2 Verificar que todos los campos tienen etiqueta asociada, que todos los botones tienen texto de acción y que todas las tablas tienen encabezados.
 - [x] 2.3 Verificar los mensajes de lista vacía, búsqueda sin resultados, búsqueda vacía con catálogo completo, alta rechazada, alta correcta y venta rechazada.
 
-## 3. Regresión y cierre
+## 3. Proyecto local en la raíz
 
-- [x] 3.1 Ejecutar la suite CJS completa y comprobar, en 320 px y 1280 px, que no hay desplazamiento horizontal de la página ni errores de consola.
-- [x] 3.2 Sincronizar la especificación en `openspec/specs/estructura-pantallas-libreria/` y archivar el cambio.
+- [x] 3.1 Mover `index.html`, `css/`, `js/`, `tests/` y el README del frontend a la raíz con `git mv` y eliminar la API (`app/`, `requirements.txt`, pruebas `.http`).
+- [x] 3.2 Verificar desde `index.html` de la raíz, en `file://`, que todo funciona y que no se hace ninguna petición de red; volver a correr la suite CJS desde `tests/`.
+
+## 4. Regresión y cierre
+
+- [x] 4.1 Ejecutar la suite CJS completa y comprobar, en 320 px y 1280 px, que no hay desplazamiento horizontal de la página ni errores de consola.
+- [x] 4.2 Sincronizar la especificación en `openspec/specs/estructura-pantallas-libreria/` y archivar el cambio.

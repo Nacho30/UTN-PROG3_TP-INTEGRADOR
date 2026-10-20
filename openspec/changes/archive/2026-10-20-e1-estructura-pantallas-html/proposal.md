@@ -18,8 +18,12 @@ que quede como especificación principal y pueda archivarse igual que el resto.
   botones con textos de acción y tablas con encabezados.
 - Documentar los mensajes de lista vacía, búsqueda sin resultados y
   operaciones correctas o rechazadas.
-- Verificar cada punto en navegador y con la suite CJS existente. No se
-  modifica código de producción.
+- Reorganizar el repositorio para que el TPI sea un proyecto 100 % local:
+  `index.html`, `css/`, `js/` y `tests/` pasan de `frontend-libreria/` a la
+  raíz, y se elimina la API de FastAPI (`app/`, `requirements.txt` y sus
+  pruebas `.http`), que no forma parte de esta consigna.
+- Verificar cada punto en navegador y con la suite CJS existente. El código de
+  las vistas no cambia: sólo su ubicación.
 
 ## Capabilities
 
@@ -32,5 +36,12 @@ que quede como especificación principal y pueda archivarse igual que el resto.
 
 ## Impact
 
-- Sin cambios en `frontend-libreria/`: el código ya cumplía el contrato.
-- Se agregan los artefactos de OpenSpec y la evidencia de validación.
+- Archivos movidos sin cambios de contenido: `frontend-libreria/{index.html,
+  css, js, tests, README.md}` → raíz. Las rutas relativas (`css/`, `js/`,
+  `tests/` → `../js`) siguen siendo válidas.
+- Eliminados: `app/` (API FastAPI y su interfaz de proveedores),
+  `requirements.txt`, `tests/test_api.http`, `tests/test_proveedores.http`.
+- `README.md` de la raíz pasa a ser el del frontend, con rutas e integrantes
+  actualizados. `docs/prompts.md` se conserva como registro.
+- Los artefactos de cambios anteriores (E5, E6) mencionan `frontend-libreria/`:
+  se dejan como registro histórico.

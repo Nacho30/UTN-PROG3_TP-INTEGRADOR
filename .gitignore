@@ -1,5 +1,5 @@
-__pycache__/
-*.pyc
-.venv/
-venv/
-.env
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

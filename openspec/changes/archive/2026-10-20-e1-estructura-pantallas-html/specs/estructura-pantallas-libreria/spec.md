@@ -8,6 +8,15 @@ ejercicios.
 
 ## ADDED Requirements
 
+### Requirement: Proyecto local con entrada en la raíz
+El proyecto SHALL tener `index.html`, `css/` y `js/` en la raíz del
+repositorio y MUST funcionar abriendo `index.html` desde disco (`file://`), sin
+API, backend, servidor, dependencias instaladas ni recursos externos.
+
+#### Scenario: Apertura desde disco sin red
+- **WHEN** se abre `index.html` de la raíz con doble clic en un navegador
+- **THEN** la página carga sólo archivos locales del proyecto y todas las vistas funcionan sin realizar peticiones de red
+
 ### Requirement: Vistas y navegación
 La aplicación SHALL tener `index.html` como entrada y ofrecer las vistas
 Catálogo, Libros, Clientes, Ventas e Historial, accesibles desde una navegación

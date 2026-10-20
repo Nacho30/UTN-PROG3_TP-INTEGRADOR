@@ -32,7 +32,18 @@ El cambio documenta un comportamiento existente. Las tareas son de
 verificación, no de implementación. Si una verificación hubiese fallado, se
 habría registrado el fallo en lugar de corregir el código desde este cambio.
 
+### Repositorio sólo con el frontend, entrada en la raíz
+
+La consigna pide entregar `index.html`, carpetas de CSS, JavaScript y recursos
+locales y un README, sin API, base de datos ni servidor. Se eliminan la API y
+su interfaz de proveedores y el frontend sube a la raíz con `git mv`, así se
+conserva el historial de cada archivo. No hace falta reescribir rutas: el HTML
+usa `css/…` y `js/…`, y las pruebas resuelven `../js` desde `tests/`.
+
 ## Risks / Trade-offs
+
+- Riesgo: perder la API del TP backend. Mitigación: queda en el historial de
+  Git (commit anterior a esta reorganización) y en el TP propio de la Unidad 2.
 
 - Riesgo: que la especificación describa más de lo implementado. Mitigación:
   cada requisito se verificó en navegador (`validation.md`).
