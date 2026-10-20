@@ -118,14 +118,80 @@ antes de publicarla.
 ## TPI Frontend · Ejercicio 3: Datos locales, catálogo y filtro
 
 ```text
-me ayudas por favor a hacer el punto 3 de este trabajo, tenés los permisos si
-necesitas instalar o correr lo que sea necesario y sube los cambios a este
-repositorio cuando esté todo terminado por favor
+Rol: Sos un desarrollador front-end con experiencia en HTML semántico, CSS
+propio y JavaScript nativo, con foco en modelado de datos, renderizado del DOM
+y código legible.
+
+Contexto:
+Adjunto la consigna «TPI: frontend de una librería». El repositorio
+https://github.com/Nacho30/UTN-PROG3_TP-INTEGRADOR contiene hoy el TP backend
+(API FastAPI en app/ e interfaz de proveedores en app/static/). El frontend de
+la librería es un proyecto independiente que debe abrirse con doble clic en
+index.html, sin npm, servidor, API ni CDN.
+
+Tarea:
+Implementar SOLO el Ejercicio 3 «Datos locales, catálogo y filtro».
+
+1. Estructura del proyecto:
+   - Crear la carpeta frontend-libreria/ con index.html, css/styles.css y js/.
+   - Cargar los scripts como scripts clásicos con defer (sin módulos ES), para
+     que funcionen abriendo el archivo desde el disco (file://).
+
+2. Datos locales (js/datos.js):
+   - Definir EDITORIALES, GENEROS, AUTORES, LIBROS y CLIENTES con datos
+     ficticios e identificadores estables (ED-1, GE-1, AU-1, LI-1, CL-1).
+   - Relacionar los libros por id: editorialId (obligatoria), generoId
+     (opcional, null = «Sin clasificar») y autorIds (uno o más).
+   - Incluir al menos un libro sin género para mostrar «Sin clasificar».
+   - Al iniciar, validar que todas las relaciones existan e informar en la
+     consola cualquier inconsistencia.
+
+3. Catálogo (js/catalogo.js):
+   - Generar las tarjetas desde el array LIBROS, mostrando título, ISBN,
+     editorial, género, autores y precio en ARS con dos decimales.
+   - Resolver los nombres de editorial, género y autores a partir de sus ids.
+
+4. Filtro por título:
+   - Ignorar espacios en los extremos y diferencias entre mayúsculas y
+     minúsculas; aceptar coincidencias parciales.
+   - Filtrar mientras se escribe; Enter no debe recargar la página.
+   - Búsqueda vacía muestra el catálogo completo; sin coincidencias, mostrar
+     un mensaje en texto.
+   - Insertar todo dato con textContent/createElement, nunca con innerHTML.
+
+Restricciones:
+- Únicamente HTML, CSS y JavaScript nativo incluidos en el proyecto: sin
+  frameworks, librerías ni CDNs.
+- No modificar la API de Python, app/static/ ni los tests de la API.
+- No implementar altas, ventas, historial ni persistencia (Ejercicios 4 a 6).
+- Mensajes, comentarios y nombres de archivos/variables en español.
+
+Entregables:
+1. frontend-libreria/ con index.html, css/styles.css, js/datos.js y
+   js/catalogo.js.
+2. frontend-libreria/README.md con instrucciones de apertura, estructura,
+   modelo de datos, estado de los ejercicios y pendientes.
+3. Verificación manual, registrando en el README el resultado observado real:
+   - búsqueda con espacios y mayúsculas, coincidencia parcial, búsqueda vacía
+     y búsqueda sin resultados;
+   - texto con etiquetas HTML mostrado de forma literal;
+   - libro sin género mostrado como «Sin clasificar»;
+   - foco visible y recorrido por teclado; vistas de 320 px y 1280 px sin
+     desplazamiento horizontal de la página; consola sin errores.
+
+Entrega:
+Instalá o ejecutá lo que sea necesario para verificar el trabajo. Subí los
+cambios a la rama main en un único commit con mensaje descriptivo en español
+e informá los archivos modificados, los casos verificados y cualquier
+pendiente.
 ```
 
-Se adjuntó la consigna «TPI: frontend de una librería». Como el repositorio
-contenía el TP backend, se acordó crear el frontend en una carpeta nueva
-(`frontend-libreria/`) sin modificar la API ni `app/static/`.
+**Decisión de alcance:** como el repositorio contenía el TP backend, el
+frontend se creó en una carpeta nueva (`frontend-libreria/`) sin modificar la
+API ni `app/static/`.
+
+**Estructura del prompt:** Rol → Contexto → Tarea → Restricciones →
+Entregables → Entrega.
 
 ---
 
