@@ -219,6 +219,70 @@ Entregables → Entrega.
 
 ---
 
+## TPI Frontend · Ejercicio 6: Persistencia local
+
+```text
+Rol: Actuá como orquestador técnico de un equipo de desarrollo.
+
+Contexto:
+El proyecto incluye `frontend-libreria/`, una aplicación estática de librería
+realizada con HTML, CSS y JavaScript nativos. Ya implementa catálogo, altas de
+libros y clientes, ventas simuladas e historial con snapshots en memoria.
+
+Modo de trabajo:
+- Como orquestador, revisá la consigna, el cambio OpenSpec, el checkout y las
+  pruebas existentes antes de editar.
+- Delegá la implementación a un agente y proporcionale los requisitos,
+  restricciones y patrones detectados.
+- Exigí TDD con baseline, RED, GREEN, triangulación y refactor en la suite CJS.
+- Integrá el resultado, validá los casos manuales disponibles y no declares
+  como ejecutada ninguna evidencia que el entorno no haya permitido realizar.
+
+Tarea:
+Implementar el Ejercicio 6: persistir libros, clientes y ventas en
+`localStorage` al abrir `frontend-libreria/index.html` directamente desde el
+disco. En la primera apertura deben cargarse y guardarse los ejemplos; en las
+siguientes se debe restaurar el estado sin duplicarlos.
+
+Requisitos:
+- Usar un único estado versionado que agrupe libros, clientes y ventas.
+- Persistir solamente altas válidas y ventas confirmadas; no guardar borradores
+  ni formularios inválidos.
+- Mantener snapshots históricos: si cambia el precio del catálogo guardado,
+  una venta anterior conserva precio unitario, subtotales y total originales.
+- Conservar el funcionamiento de catálogo, validaciones, navegación,
+  accesibilidad y apertura por `file://`.
+- Documentar clave, estructura, reinicio, aislamiento por navegador/perfil/
+  origen y resultados de las verificaciones reproducibles.
+
+Restricciones:
+- Solo HTML, CSS y JavaScript nativos locales.
+- Sin frameworks, librerías, CDN, backend, API, `fetch` ni llamadas de red.
+- No modificar el backend FastAPI ni mezclar los dos proyectos del repositorio.
+
+Entregables:
+1. Persistencia y restauración en los scripts de `frontend-libreria/js/`.
+2. Pruebas CJS aisladas para semillas, estado inválido, altas, venta de $5000
+   y precio histórico.
+3. README actualizado con procedimiento de validación y alcance de los datos.
+4. Tareas OpenSpec actualizadas con evidencia de pruebas y limitaciones reales.
+
+Entrega:
+Dejar los cambios listos para revisión en la rama de trabajo. Informar archivos
+modificados, resultados de pruebas, decisiones y cualquier validación manual
+que requiera ejecutarse en un navegador local.
+```
+
+**Metodología aplicada:** el orquestador recuperó la consigna y el estado del
+cambio OpenSpec, coordinó la implementación y contrastó los resultados; el
+agente de implementación trabajó con TDD y mantuvo el alcance estático y nativo
+del frontend.
+
+**Estructura del prompt:** Rol → Contexto → Modo de trabajo → Tarea →
+Requisitos → Restricciones → Entregables → Entrega.
+
+---
+
 ## TPI Frontend · Ejercicio 5: Venta simulada e historial
 
 ```text

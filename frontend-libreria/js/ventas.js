@@ -210,6 +210,7 @@ function iniciarVentas() {
     const resultado = confirmarVenta(borradorVenta, LIBROS, CLIENTES, VENTAS);
     mostrarErroresVenta(resultado.errores, true);
     if (resultado.errores.length) return;
+    const persistido = persistirEstadoBiblioteca(VENTAS);
     document.getElementById("venta-cliente").value = "";
     document.getElementById("venta-libro").value = "";
     document.getElementById("venta-cantidad").value = "1";
@@ -217,8 +218,10 @@ function iniciarVentas() {
     renderizarBorradorVenta();
     renderizarHistorialVentas();
     const mensaje = document.getElementById("ventas-mensaje");
-    mensaje.classList.add("message--info");
-    mensaje.textContent = `Venta ${resultado.venta.id} confirmada por ${formatearCentavosVenta(resultado.venta.totalCentavos)}. Podés consultar su detalle en Historial o iniciar otra venta.`;
+    mensaje.classList.add(persistido ? "message--info" : "message--warning");
+    mensaje.textContent = persistido
+      ? `Venta ${resultado.venta.id} confirmada por ${formatearCentavosVenta(resultado.venta.totalCentavos)}. Podés consultar su detalle en Historial o iniciar otra venta.`
+      : `Venta ${resultado.venta.id} confirmada, pero no se pudo guardar en este navegador.`;
     document.getElementById("venta-cliente").focus();
   });
 }

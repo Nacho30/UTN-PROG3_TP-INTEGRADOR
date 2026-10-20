@@ -104,11 +104,14 @@ function iniciarAltaClientes() {
       email: datos.email,
     };
     CLIENTES.push(cliente);
+    const persistido = persistirEstadoBiblioteca();
 
     formulario.reset();
     marcarAriaInvalid(idsCampos, new Set());
-    mensajeResultado.classList.add("message--info");
-    mensajeResultado.textContent = `Cliente «${cliente.nombreCompleto}» dado de alta con el id ${cliente.id}.`;
+    mensajeResultado.classList.add(persistido ? "message--info" : "message--warning");
+    mensajeResultado.textContent = persistido
+      ? `Cliente «${cliente.nombreCompleto}» dado de alta con el id ${cliente.id}.`
+      : `Cliente «${cliente.nombreCompleto}» dado de alta, pero no se pudo guardar en este navegador.`;
     renderizarTablaClientes();
     document.dispatchEvent(new Event("clientes-actualizados"));
   });

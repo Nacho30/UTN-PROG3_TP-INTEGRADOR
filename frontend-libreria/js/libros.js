@@ -229,11 +229,14 @@ function iniciarAltaLibros() {
       autorIds: datos.autorIds,
     };
     LIBROS.push(libro);
+    const persistido = persistirEstadoBiblioteca();
 
     formulario.reset();
     marcarAriaInvalid(idsCampos, new Set());
-    mensajeResultado.classList.add("message--info");
-    mensajeResultado.textContent = `Libro «${libro.titulo}» dado de alta con el id ${libro.id}.`;
+    mensajeResultado.classList.add(persistido ? "message--info" : "message--warning");
+    mensajeResultado.textContent = persistido
+      ? `Libro «${libro.titulo}» dado de alta con el id ${libro.id}.`
+      : `Libro «${libro.titulo}» dado de alta, pero no se pudo guardar en este navegador.`;
     renderizarTablaLibros();
     refrescarCatalogo();
     document.dispatchEvent(new Event("libros-actualizados"));

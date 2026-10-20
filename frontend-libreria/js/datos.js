@@ -27,7 +27,7 @@ const AUTORES = [
   { id: "AU-3", nombre: "Paula Ríos" },
 ];
 
-const LIBROS = [
+let LIBROS = [
   {
     id: "LI-1",
     titulo: "El viento del Aconcagua",
@@ -84,8 +84,86 @@ const LIBROS = [
   },
 ];
 
-const CLIENTES = [
+let CLIENTES = [
   { id: "CL-1", nombreCompleto: "Ana Gómez", email: "ana.gomez@ejemplo.com" },
   { id: "CL-2", nombreCompleto: "Bruno Pérez", email: "bruno.perez@ejemplo.com" },
   { id: "CL-3", nombreCompleto: "Carla Sosa", email: "carla.sosa@ejemplo.com" },
 ];
+
+/* Persistencia local E6. El sobre único evita restaurar colecciones de épocas
+ * distintas y las semillas se copian para que nunca se muten accidentalmente. */
+const CLAVE_ESTADO_BIBLIOTECA = "paginas-del-sol.estado.v1";
+const VERSION_ESTADO_BIBLIOTECA = 1;
+
+function copiarEstadoBiblioteca(valor) {
+  return JSON.parse(JSON.stringify(valor));
+}
+
+function crearEstadoSemillaBiblioteca() {
+  return {
+    version: VERSION_ESTADO_BIBLIOTECA,
+    libros: copiarEstadoBiblioteca(LIBROS),
+    clientes: copiarEstadoBiblioteca(CLIENTES),
+    ventas: [],
+  };
+}
+
+function esEstadoBibliotecaValido(estado) {
+  return Boolean(
+    estado
+    && estado.version === VERSION_ESTADO_BIBLIOTECA
+    && Array.isArray(estado.libros)
+    && Array.isArray(estado.clientes)
+    && Array.isArray(estado.ventas)
+  );
+}
+
+function leerEstadoBiblioteca(almacenamiento = globalThis.localStorage) {
+  if (!almacenamiento) return null;
+  try {
+    const texto = almacenamiento.getItem(CLAVE_ESTADO_BIBLIOTECA);
+    if (!texto) return null;
+    const estado = JSON.parse(texto);
+    return esEstadoBibliotecaValido(estado) ? copiarEstadoBiblioteca(estado) : null;
+  } catch {
+    return null;
+  }
+}
+
+function guardarEstadoBiblioteca(estado, almacenamiento = globalThis.localStorage) {
+  if (!almacenamiento || !esEstadoBibliotecaValido(estado)) return false;
+  try {
+    almacenamiento.setItem(CLAVE_ESTADO_BIBLIOTECA, JSON.stringify(copiarEstadoBiblioteca(estado)));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function hidratarEstadoBiblioteca(almacenamiento = globalThis.localStorage) {
+  const persistido = leerEstadoBiblioteca(almacenamiento);
+  if (persistido) return { origen: "persistido", estado: persistido };
+  const semillas = crearEstadoSemillaBiblioteca();
+  guardarEstadoBiblioteca(semillas, almacenamiento);
+  return { origen: "semillas", estado: semillas };
+}
+
+function estadoActualBiblioteca(ventas) {
+  return {
+    version: VERSION_ESTADO_BIBLIOTECA,
+    libros: copiarEstadoBiblioteca(LIBROS),
+    clientes: copiarEstadoBiblioteca(CLIENTES),
+    ventas: copiarEstadoBiblioteca(ventas),
+  };
+}
+
+function persistirEstadoBiblioteca(ventas = (typeof VENTAS === "undefined" ? [] : VENTAS)) {
+  return guardarEstadoBiblioteca(estadoActualBiblioteca(ventas));
+}
+
+let ESTADO_BIBLIOTECA_INICIAL = null;
+if (!globalThis.__E6_NO_AUTOINICIALIZAR__) {
+  ESTADO_BIBLIOTECA_INICIAL = hidratarEstadoBiblioteca();
+  LIBROS = ESTADO_BIBLIOTECA_INICIAL.estado.libros;
+  CLIENTES = ESTADO_BIBLIOTECA_INICIAL.estado.clientes;
+}

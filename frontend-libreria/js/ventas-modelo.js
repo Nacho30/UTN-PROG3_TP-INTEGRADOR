@@ -1,5 +1,5 @@
-/* Reglas de E5: estado efímero y cálculos en centavos enteros seguros. */
-const VENTAS = [];
+/* Reglas E5/E6: cálculos en centavos y ventas restauradas como snapshots. */
+const VENTAS = ESTADO_BIBLIOTECA_INICIAL ? ESTADO_BIBLIOTECA_INICIAL.estado.ventas : [];
 const borradorVenta = { clienteId: "", renglones: [] };
 
 function cantidadVenta(valor) {

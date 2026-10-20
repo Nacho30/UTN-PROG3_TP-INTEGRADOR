@@ -73,7 +73,7 @@ frontend-libreria/
 | 2 · Presentación CSS | CSS propio para catálogo, formularios y tablas de E3/E4/E5 |
 | 4 · Altas de libros y clientes | Implementado (en memoria, sin persistencia) |
 | 5 · Ventas e Historial | Implementado en memoria; evidencia de pruebas al final |
-| 6 · `localStorage` | Pendiente |
+| 6 · `localStorage` | Implementado: libros, clientes y ventas persisten localmente |
 
 ### Pantallas que funcionan hoy
 
@@ -85,8 +85,7 @@ frontend-libreria/
 
 ### Qué queda pendiente
 
-- Persistencia con `localStorage` (Ejercicio 6): hoy las altas se pierden al
-  recargar la página, igual que las ventas. E6 no está implementado.
+- No quedan ejercicios pendientes dentro del alcance actual del frontend.
 
 ## Ejercicio 3 · Datos locales, catálogo y filtro
 
@@ -278,4 +277,83 @@ Evidencia y detalle: `openspec/changes/e5-venta-simulada-historial/validation.md
 `browser-aceptacion.json` y `browser-regresion.json` del mismo cambio. Los casos
 browser se automatizaron con herramientas existentes del entorno; no se agregó
 una dependencia al proyecto. Otros motores y lectores de pantalla no fueron
-verificados. **E6 sigue pendiente: ventas y altas se pierden al recargar.**
+verificados.
+
+## Ejercicio 6 · Persistencia local
+
+La librería guarda sus colecciones mutables de libros, clientes y ventas en
+`localStorage`. No se usa servidor, API, cuenta de usuario ni sincronización:
+los datos pertenecen exclusivamente al **navegador**, **perfil** y **origen**
+desde el que se abre esta página. Por eso no aparecen en otro navegador, otro
+perfil ni para otra persona que use el mismo equipo.
+
+### Clave y estructura
+
+La clave es `paginas-del-sol.estado.v1`. Su valor es un JSON versionado con
+esta forma:
+
+```json
+{
+  "version": 1,
+  "libros": ["..."],
+  "clientes": ["..."],
+  "ventas": ["..."]
+}
+```
+
+El catálogo persistido está en `libros` dentro de esa clave. La primera apertura
+crea una copia de los seis libros y tres clientes de ejemplo junto con un
+historial vacío. Las aperturas posteriores restauran esa misma estructura: no
+vuelven a agregar semillas ni reemplazan altas o ventas previas. Para reiniciar
+la práctica, eliminá la clave desde las herramientas de almacenamiento del
+navegador y recargá `index.html`.
+
+Las altas válidas y las ventas confirmadas guardan el sobre completo. Los
+borradores y los envíos inválidos no se persisten. Si el navegador bloquea o
+agota `localStorage`, la operación sigue disponible durante la sesión, pero la
+interfaz muestra un mensaje textual indicando que no se pudo guardar.
+
+### Precio histórico
+
+Cada venta conserva snapshots de cliente y renglones, incluidos
+`precioUnitarioCentavos`, `subtotalCentavos` y `totalCentavos`. Para reproducir
+la prueba pedagógica:
+
+1. Confirmá una venta con un libro de $ 1500 × 2 y otro de $ 2000 × 1.
+2. En la clave indicada, modificá **solo** `libros[n].precio` del catálogo.
+3. Recargá la página y abrí el detalle de la venta.
+4. La venta debe seguir mostrando subtotales $ 3000,00 y $ 2000,00, y total
+   $ 5000,00, aunque el catálogo muestre el precio modificado.
+
+### Evidencia automatizada E6
+
+La suite CJS se ejecutó el 20/10/2026 con:
+
+```powershell
+node --test frontend-libreria/tests
+```
+
+Resultado: **22/22 pruebas aprobadas**, sin dependencias externas. Las cinco
+pruebas de `tests/persistencia.test.cjs` comprobaron: primera carga, restauración
+válida, recuperación de JSON inválido, recarga sin duplicar semillas, altas de
+libro/cliente, venta de $ 5000,00 y precio histórico tras modificar únicamente
+el catálogo persistido. Las 17 pruebas E3-E5 existentes también se mantuvieron
+verdes.
+
+### Casos manuales E6 a reproducir
+
+El entorno de esta implementación no permitió abrir una URL `file://` con la
+automatización disponible, por lo que no se declara una validación visual como
+ejecutada. Antes de entregar, abrí `index.html` con doble clic y registrá el
+resultado observado de los siguientes casos:
+
+| Caso | Resultado esperado |
+|------|--------------------|
+| Búsqueda | Mayúsculas/minúsculas, vacía e inexistente conservan el comportamiento E3 |
+| ISBN | Duplicado rechazado y alta válida persistida tras recargar |
+| Email | Inválido y duplicado sin importar mayúsculas rechazados; alta válida persistida |
+| Venta inválida | No agrega ni guarda ventas con cliente/libro/cantidad inválidos o duplicados |
+| Venta válida | $ 1500 × 2 + $ 2000 × 1 conserva subtotales $ 3000/$ 2000 y total $ 5000 |
+| Recarga | No duplica los seis libros ni los tres clientes iniciales |
+| Precio histórico | Sigue el procedimiento anterior y conserva los importes históricos |
+| Accesibilidad y tamaños | Tab/foco visible y 320/1280 px sin desplazamiento horizontal de página |
