@@ -1,0 +1,282 @@
+{
+  "timestamp": "2026-10-20T01:15:17.787Z",
+  "url": "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/frontend-libreria/index.html",
+  "browser": "151.0.7922.34",
+  "results": [
+    {
+      "name": "Inicio vacío e identificación de secciones",
+      "status": "PASS",
+      "detail": "Borrador/historial vacíos y hashes activos"
+    },
+    {
+      "name": "Confirmar sin datos y sin renglones",
+      "status": "PASS"
+    },
+    {
+      "name": "Sin cliente conserva borrador válido",
+      "status": "PASS"
+    },
+    {
+      "name": "Rechazar cantidad al agregar: \"\"",
+      "status": "PASS"
+    },
+    {
+      "name": "Rechazar cantidad al agregar: \"0\"",
+      "status": "PASS"
+    },
+    {
+      "name": "Rechazar cantidad al agregar: \"-1\"",
+      "status": "PASS"
+    },
+    {
+      "name": "Rechazar cantidad al agregar: \"1.5\"",
+      "status": "PASS"
+    },
+    {
+      "name": "Rechazar cantidad al agregar: \"NaN\"",
+      "status": "PASS"
+    },
+    {
+      "name": "Rechazar cantidad al agregar: \"Infinity\"",
+      "status": "PASS"
+    },
+    {
+      "name": "Libro inexistente manipulado al agregar",
+      "status": "PASS"
+    },
+    {
+      "name": "Cliente inexistente manipulado al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Fixture consigna: 1500×2 + 2000×1 = 5000 y dos decimales",
+      "status": "PASS",
+      "detail": [
+        "Prueba <b>Uno</b> (LI-7)\t\nCantidad de Prueba <b>Uno</b>\n\t$ 1.500,00\t$ 3.000,00\tQuitar",
+        "Prueba <i>Dos</i> (LI-8)\t\nCantidad de Prueba <i>Dos</i>\n\t$ 2.000,00\t$ 2.000,00\tQuitar"
+      ]
+    },
+    {
+      "name": "Duplicado informado conserva un renglón y cantidad",
+      "status": "PASS"
+    },
+    {
+      "name": "Modificar y quitar: importes/estado vacío/foco",
+      "status": "PASS",
+      "detail": {
+        "focus": "venta-libro",
+        "tag": "SELECT"
+      }
+    },
+    {
+      "name": "Edición pendiente \"\" bloquea confirmar y conserva borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Edición pendiente \"0\" bloquea confirmar y conserva borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Edición pendiente \"-3\" bloquea confirmar y conserva borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Edición pendiente \"1.5\" bloquea confirmar y conserva borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Edición pendiente \"NaN\" bloquea confirmar y conserva borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Edición pendiente \"Infinity\" bloquea confirmar y conserva borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar libro eliminado al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar cliente eliminado al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar precio Infinity al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar precio NaN al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar precio 0 al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar precio -1 al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Revalidar precio Number.MAX_VALUE al confirmar",
+      "status": "PASS"
+    },
+    {
+      "name": "Decimales 0.10+0.20 = 0,30",
+      "status": "PASS"
+    },
+    {
+      "name": "Cantidad extrema rechazada sin infinito",
+      "status": "PASS"
+    },
+    {
+      "name": "Alta LI-7/CL-4 refresca opciones conservando filtro y borrador",
+      "status": "PASS"
+    },
+    {
+      "name": "Confirmar una vez, limpiar y mantener historial de lectura",
+      "status": "PASS",
+      "detail": "VE-1\t19/10/2026, 10:15:12\tCliente <em>histórico</em>\t$ 5.000,00\tVer detalle"
+    },
+    {
+      "name": "Snapshot histórico tras mutar catálogo/cliente y confirmar venta posterior",
+      "status": "PASS",
+      "detail": {
+        "ids": [
+          "VE-1",
+          "VE-2"
+        ],
+        "firstDetail": "Detalle de VE-1\n\n19/10/2026, 10:15:13 · Cliente <em>histórico</em> (CL-4) · prueba@ejemplo.com\n\nLibro\tISBN\tCantidad\tPrecio unitario\tSubtotal\nPrueba <b>Uno</b> (LI-7)\tPRUEBA-UNO\t2\t$ 1.500,00\t$ 3.000,00\nPrueba <i>Dos</i> (LI-8)\tPRUEBA-DOS\t1\t$ 2.000,00\t$ 2.000,00\n\nTotal: $ 5.000,00",
+        "independence": {
+          "cliente": true,
+          "array": true,
+          "items": true
+        }
+      }
+    },
+    {
+      "name": "HTML literal en opciones, catálogo, borrador e historial",
+      "status": "PASS"
+    },
+    {
+      "name": "Teclado Tab/Enter, labels, foco visible y errores accesibles",
+      "status": "PASS",
+      "detail": {
+        "visible": true,
+        "outline": "3px",
+        "labels": 1
+      }
+    },
+    {
+      "name": "Ancho 320 sin desborde, tablas con scroll local",
+      "status": "PASS",
+      "detail": {
+        "scroll": 320,
+        "client": 320,
+        "tables": [
+          {
+            "scroll": 589,
+            "client": 288,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 313,
+            "client": 288,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 532,
+            "client": 254,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 402,
+            "client": 288,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 519,
+            "client": 254,
+            "overflow": "auto"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ancho 1280 sin desborde, tablas con scroll local",
+      "status": "PASS",
+      "detail": {
+        "scroll": 1280,
+        "client": 1280,
+        "tables": [
+          {
+            "scroll": 1168,
+            "client": 1168,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 1168,
+            "client": 1168,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 1118,
+            "client": 1118,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 1168,
+            "client": 1168,
+            "overflow": "auto"
+          },
+          {
+            "scroll": 1118,
+            "client": 1118,
+            "overflow": "auto"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Recarga reinicia seis libros/tres clientes/sin ventas",
+      "status": "PASS"
+    },
+    {
+      "name": "Acceso directo file:// con hash Ventas/Historial",
+      "status": "PASS",
+      "detail": "Acceso directo observado a ambos hashes"
+    },
+    {
+      "name": "Desborde por multiplicación y suma se rechaza",
+      "status": "PASS"
+    },
+    {
+      "name": "Centavo exacto cerca MAX_SAFE_INTEGER en borrador e historial",
+      "status": "PASS",
+      "detail": {
+        "expected": "90.071.992.547.409,91",
+        "oldLossy": "$ 90.071.992.547.409,90",
+        "rendered": "Detalle de VE-1\n\n19/10/2026, 10:15:17 · Ana Gómez (CL-1) · ana.gomez@ejemplo.com\n\nLibro\tISBN\tCantidad\tPrecio unitario\tSubtotal\nCentavo máximo (LI-7)\tCENT-MAX\t9007199254740991\t$ 0,01\t$ 90.071.992.547.409,91\n\nTotal: $ 90.071.992.547.409,91"
+      }
+    },
+    {
+      "name": "Redondeo de precio10.075 al centavo:10,08",
+      "status": "PASS"
+    },
+    {
+      "name": "Confirmación revalida duplicado DOM y libro id alterado",
+      "status": "PASS"
+    },
+    {
+      "name": "file:// sin errores consola, warnings ni red",
+      "status": "PASS",
+      "detail": {
+        "errors": [],
+        "warnings": [],
+        "requests": []
+      }
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "requests": []
+}

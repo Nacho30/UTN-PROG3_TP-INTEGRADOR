@@ -13,6 +13,8 @@
     <script src="js/navegacion.js" defer></script>
     <script src="js/libros.js" defer></script>
     <script src="js/clientes.js" defer></script>
+    <script src="js/ventas-modelo.js" defer></script>
+    <script src="js/ventas.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
@@ -28,6 +30,8 @@
             <li><a class="nav-link" href="#catalogo" aria-current="page">Catálogo</a></li>
             <li><a class="nav-link" href="#libros">Libros</a></li>
             <li><a class="nav-link" href="#clientes">Clientes</a></li>
+            <li><a class="nav-link" href="#ventas">Ventas</a></li>
+            <li><a class="nav-link" href="#historial">Historial</a></li>
           </ul>
         </nav>
       </div>
@@ -223,6 +227,62 @@
             El formulario y la tabla se generan con JavaScript. Activalo para usar esta sección.
           </p>
         </noscript>
+      </section>
+      <section id="ventas" aria-labelledby="ventas-titulo">
+        <div class="section-heading">
+          <p class="eyebrow">Ejercicio 5 · Simulación académica</p>
+          <h1 id="ventas-titulo">Ventas</h1>
+        </div>
+        <p class="message message--info">Las altas y ventas sólo duran esta sesión: se pierden al recargar (E6 pendiente).</p>
+        <form id="form-venta" class="card form-alta" novalidate>
+          <div class="form-campo campo-ancho">
+            <label class="form-campo__label" for="venta-cliente">Cliente</label>
+            <select id="venta-cliente" class="input" aria-describedby="ventas-errores"></select>
+          </div>
+          <div class="form-campo">
+            <label class="form-campo__label" for="venta-libro">Libro</label>
+            <select id="venta-libro" class="input" aria-describedby="venta-ayuda ventas-errores"></select>
+          </div>
+          <div class="form-campo">
+            <label class="form-campo__label" for="venta-cantidad">Cantidad</label>
+            <input id="venta-cantidad" class="input" type="number" min="1" step="1" value="1" inputmode="numeric" aria-describedby="venta-ayuda ventas-errores" />
+          </div>
+          <p id="venta-ayuda" class="help campo-ancho">Usá cantidades enteras mayores que cero. Si el libro ya está agregado, modificá la cantidad en su renglón.</p>
+          <div class="form-acciones campo-ancho">
+            <button id="venta-agregar" class="button button--secondary" type="button">Agregar renglón</button>
+          </div>
+          <div class="campo-ancho">
+            <h2 id="venta-borrador-titulo">Borrador de la venta</h2>
+            <p id="venta-vacio" class="message">Todavía no agregaste libros a esta venta.</p>
+            <div class="table-wrap">
+              <table class="table" aria-labelledby="venta-borrador-titulo">
+                <thead><tr><th scope="col">Libro</th><th scope="col">Cantidad</th><th scope="col">Precio unitario</th><th scope="col">Subtotal</th><th scope="col">Acción</th></tr></thead>
+                <tbody id="venta-cuerpo"></tbody>
+              </table>
+            </div>
+            <p class="venta-total">Total: <output id="venta-total">$ 0,00</output></p>
+          </div>
+          <div class="form-acciones campo-ancho">
+            <button id="venta-confirmar" class="button button--primary" type="submit">Confirmar venta simulada</button>
+          </div>
+        </form>
+        <div id="ventas-errores" class="message message--warning" role="alert" tabindex="-1"></div>
+        <p id="ventas-mensaje" class="message" role="status"></p>
+      </section>
+
+      <section id="historial" aria-labelledby="historial-titulo">
+        <div class="section-heading">
+          <p class="eyebrow">Ventas confirmadas · Sólo consulta</p>
+          <h1 id="historial-titulo">Historial</h1>
+        </div>
+        <p id="historial-vacio" class="message message--info">Todavía no hay ventas confirmadas en esta sesión.</p>
+        <div class="table-wrap">
+          <table class="table" aria-labelledby="historial-titulo">
+            <thead><tr><th scope="col">Id</th><th scope="col">Fecha</th><th scope="col">Cliente</th><th scope="col">Total</th><th scope="col">Consulta</th></tr></thead>
+            <tbody id="historial-cuerpo"></tbody>
+          </table>
+        </div>
+        <div id="historial-detalle" class="card detalle-venta" role="region" aria-labelledby="historial-detalle-titulo" hidden></div>
       </section>
     </main>
 

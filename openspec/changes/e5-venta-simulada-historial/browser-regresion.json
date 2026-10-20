@@ -1,0 +1,142 @@
+{
+  "timestamp": "2026-10-20T01:14:17.258Z",
+  "url": "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/frontend-libreria/index.html#clientes",
+  "browser": "151.0.7922.34",
+  "results": [
+    {
+      "name": "Datos iniciales y tablas E3/E4",
+      "status": "PASS",
+      "detail": "6 libros, 3 clientes"
+    },
+    {
+      "name": "Filtro normalizado y sin resultados",
+      "status": "PASS",
+      "detail": "Espacios/mayusculas, parcial, vacio"
+    },
+    {
+      "name": "Libros invalidos y accesibles",
+      "status": "PASS",
+      "detail": "El título es obligatorio.\nEl ISBN es obligatorio.\nEl precio es obligatorio.\nDebe seleccionar una editorial.\nDebe seleccionar al menos un autor."
+    },
+    {
+      "name": "Alta LI-7 conserva filtro y muestra HTML literal",
+      "status": "PASS",
+      "detail": {
+        "id": "LI-7",
+        "titulo": "Viento <b>literal</b>",
+        "isbn": "AbC-123",
+        "precio": 1500,
+        "editorialId": "ED-1",
+        "generoId": null,
+        "autorIds": [
+          "AU-1"
+        ]
+      }
+    },
+    {
+      "name": "ISBN duplicado normalizado rechazado",
+      "status": "PASS",
+      "detail": "ABC-123 equivale a a b c 1 2 3"
+    },
+    {
+      "name": "Precio negativo rechazado",
+      "status": "PASS"
+    },
+    {
+      "name": "Clientes invalidos y accesibles",
+      "status": "PASS"
+    },
+    {
+      "name": "Alta CL-4 normaliza extremos y conserva HTML literal",
+      "status": "PASS",
+      "detail": {
+        "id": "CL-4",
+        "nombreCompleto": "<i>Cliente</i> Prueba",
+        "email": "PRUEBA@EJEMPLO.COM"
+      }
+    },
+    {
+      "name": "Email duplicado normalizado rechazado",
+      "status": "PASS"
+    },
+    {
+      "name": "Navegacion hash aria-current",
+      "status": "PASS",
+      "detail": "Clientes"
+    },
+    {
+      "name": "Teclado y foco visible",
+      "status": "PASS",
+      "detail": {
+        "visible": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "Responsive 320",
+      "status": "PASS",
+      "detail": {
+        "scroll": 320,
+        "client": 320,
+        "tables": [
+          {
+            "scroll": 589,
+            "client": 288
+          },
+          {
+            "scroll": 313,
+            "client": 288
+          },
+          {
+            "scroll": 532,
+            "client": 254
+          },
+          {
+            "scroll": 402,
+            "client": 288
+          }
+        ]
+      }
+    },
+    {
+      "name": "Responsive 1280",
+      "status": "PASS",
+      "detail": {
+        "scroll": 1280,
+        "client": 1280,
+        "tables": [
+          {
+            "scroll": 1168,
+            "client": 1168
+          },
+          {
+            "scroll": 1168,
+            "client": 1168
+          },
+          {
+            "scroll": 1118,
+            "client": 1118
+          },
+          {
+            "scroll": 1168,
+            "client": 1168
+          }
+        ]
+      }
+    },
+    {
+      "name": "Reload elimina altas de memoria",
+      "status": "PASS"
+    },
+    {
+      "name": "Consola sin errores ni warnings",
+      "status": "PASS",
+      "detail": {
+        "errors": [],
+        "warnings": []
+      }
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

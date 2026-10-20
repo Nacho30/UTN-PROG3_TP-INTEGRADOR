@@ -444,6 +444,33 @@ select:focus-visible {
   border-bottom: 0;
 }
 
+/* E5: las tablas anchas se desplazan sólo dentro de su contenedor. */
+#ventas,
+#historial {
+  margin-top: var(--espacio-5);
+  min-width: 0;
+}
+
+#ventas .campo-ancho,
+.detalle-venta {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cantidad-renglon { width: 7rem; }
+.venta-total { font-weight: 700; margin-block: var(--espacio-3) 0; }
+.detalle-venta { margin-top: var(--espacio-3); }
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---------- Pie ---------- */
 .site-footer {
   padding-block: var(--espacio-3);

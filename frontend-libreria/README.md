@@ -10,11 +10,48 @@ datos son ficticios y viven en el navegador.
 2. Abrir `frontend-libreria/index.html` con doble clic en cualquier navegador
    actual. No hace falta npm ni levantar un servidor.
 
+## Ejercicio 5 · Reglas de la venta simulada
+
+Se redondea cada precio al centavo más cercano antes de multiplicar. Cantidades,
+centavos, subtotales y total deben ser enteros seguros de JavaScript. El precio
+debe ser positivo y redondear al menos a un centavo. Valores no finitos y
+desbordamientos se rechazan. Se calcula en centavos y se presenta en ARS con
+dos decimales reutilizando el formato compartido del catálogo.
+La presentación usa una cadena decimal exacta construida desde los centavos,
+evitando perder un centavo al formatear importes cerca del límite seguro.
+
+Un libro repetido se informa como error y no se agrega ni cambia la cantidad
+anterior: la cantidad se modifica en su propio renglón. Se pueden quitar
+renglones antes de confirmar.
+
+Al confirmar se revalida todo contra los datos actuales. El registro histórico
+guarda id `VE-n`, fecha ISO, copia de cliente (id, nombre, email), renglones
+(id de libro, título, ISBN, cantidad, precio unitario y subtotal en centavos) y
+total en centavos. Son copias independientes del catálogo y el borrador.
+Un fallo conserva la venta pendiente; un éxito agrega una operación y limpia
+el borrador. Las ventas confirmadas sólo se consultan.
+
+Las altas válidas E4 notifican a los selectores de Ventas. Se actualizan sus
+opciones sin recargar ni perder cliente, libro seleccionado o renglones.
+La venta es académica: no hay stock, cobros ni facturación.
+
+### Cómo probar E5
+
+1. Ir a Ventas, seleccionar cliente y agregar libros con cantidades enteras.
+2. Repetir un libro: debe informar el duplicado sin alterar la cantidad.
+3. Cambiar cantidad en su renglón o usar Quitar: los importes se recalculan.
+4. Dejar una cantidad vacía o inválida y confirmar: se informa el error, sin
+   registrar ni vaciar la venta. Corregirla y confirmar.
+5. Consultar Historial → Ver detalle: cantidades, precios y descripciones son
+   las guardadas al confirmar. Preparar otra venta no cambia la anterior.
+6. Dar de alta libro/cliente E4 con un borrador activo: aparecen en las opciones
+   sin perderlo. Recargar vuelve a los datos iniciales y vacía el historial.
+
 ## Estructura
 
 ```
 frontend-libreria/
-├── index.html         Catálogo, altas de libros y altas de clientes
+├── index.html         Catálogo, altas, venta simulada e historial
 ├── css/styles.css     Estilos propios
 └── js/
     ├── datos.js       Datos iniciales: editoriales, géneros, autores, libros y clientes
@@ -22,7 +59,9 @@ frontend-libreria/
     ├── catalogo.js    Renderizado del catálogo, filtro por título y eventos
     ├── navegacion.js  aria-current de la navegación según la sección activa
     ├── libros.js      Alta de libros: opciones, validaciones y tabla
-    └── clientes.js    Alta de clientes: validaciones y tabla
+    ├── clientes.js    Alta de clientes: validaciones y tabla
+    ├── ventas-modelo.js  Cantidades, centavos seguros, borrador y snapshots
+    └── ventas.js      Interfaz de venta e historial de sólo consulta
 ```
 
 ## Estado de los ejercicios
@@ -30,10 +69,10 @@ frontend-libreria/
 | Ejercicio | Estado |
 |-----------|--------|
 | 3 · Datos locales, catálogo y filtro | Implementado |
-| 1 · Pantallas Libros, Clientes, Ventas e Historial | Parcial: funcionan Catálogo (E3), Libros (E4) y Clientes (E4); faltan Ventas e Historial |
-| 2 · Presentación CSS | Parcial: catálogo, formularios y tablas, adaptables a 320 y 1280 px |
+| 1 · Pantallas Libros, Clientes, Ventas e Historial | Interfaz necesaria para E3/E4/E5 implementada |
+| 2 · Presentación CSS | CSS propio para catálogo, formularios y tablas de E3/E4/E5 |
 | 4 · Altas de libros y clientes | Implementado (en memoria, sin persistencia) |
-| 5 · Ventas e Historial | Pendiente |
+| 5 · Ventas e Historial | Implementado en memoria; evidencia de pruebas al final |
 | 6 · `localStorage` | Pendiente |
 
 ### Pantallas que funcionan hoy
@@ -41,13 +80,13 @@ frontend-libreria/
 - **Catálogo** (Ejercicio 3): buscador por título y tarjetas de los libros.
 - **Libros** (Ejercicio 4): alta de libros con validaciones y tabla de listado.
 - **Clientes** (Ejercicio 4): alta de clientes con validaciones y tabla de listado.
+- **Ventas** (Ejercicio 5): cliente, renglones editables y confirmación simulada.
+- **Historial** (Ejercicio 5): lista y detalle de snapshots confirmados de la sesión.
 
 ### Qué queda pendiente
 
-- Ventas e Historial (Ejercicio 5).
-- Persistencia con `localStorage` (Ejercicio 6): hoy los altas se pierden al
-  recargar la página.
-- Editar y eliminar registros.
+- Persistencia con `localStorage` (Ejercicio 6): hoy las altas se pierden al
+  recargar la página, igual que las ventas. E6 no está implementado.
 
 ## Ejercicio 3 · Datos locales, catálogo y filtro
 
@@ -194,3 +233,49 @@ consola sin errores.
 | Nombre de cliente vacío | No se agrega; error «El nombre completo es obligatorio» | Aprobado: «El nombre completo es obligatorio.» y `aria-invalid` en `cliente-nombre` |
 | Envíos sin recarga (`preventDefault`) | Ningún envío recarga la página | Aprobado: `window.__marca = 1` siguió existiendo tras los 16 envíos (15 con `requestSubmit()` y 1 con Enter) y `location.href` no cambió (el único evento de navegación tipo «reload» del registro fue el `Page.reload` inicial de la herramienta de verificación, no un envío del formulario) |
 | Consola del navegador | Sin errores ni advertencias | Aprobado: 0 errores y 0 advertencias, incluida la carga inicial capturada con los dominios `Runtime` y `Log` de CDP |
+
+## Pruebas opcionales de desarrollo de E5
+
+Abrir el frontend no requiere Node ni estas pruebas. Si Node está disponible,
+desde la raíz del repositorio se puede ejecutar:
+
+```powershell
+node --test frontend-libreria/tests/*.test.cjs
+```
+
+La suite usa sólo módulos incorporados (`node:test`, `assert`, `fs`, `vm`).
+Se registraron **17/17 pruebas aprobadas** durante la implementación: baseline
+E3/E4 (5), cantidades/importes (3), borrador (2), confirmación/snapshots (3),
+contratos HTML (2) y coordinación de altas (2). Los datos de prueba están
+separados en VM y no reemplazan los seis libros ni tres clientes iniciales.
+
+Se aplicaron ciclos RED/GREEN y triangulación; su evidencia por tarea y los
+límites del arnés se encuentran en
+`openspec/changes/e5-venta-simulada-historial/validation.md`. Las pruebas VM y
+los contratos HTML no acreditan por sí solos teclado, presentación ni el
+funcionamiento real con `file://`; la validación de navegador se informa aparte.
+
+## Validación real de E5 (19/10/2026)
+
+Un validador independiente ejecutó **43/43 casos aprobados** en Chromium
+151.0.7922.34 headless abriendo `index.html` por `file://`, **15/15 regresiones
+E3/E4** y **17/17 pruebas nativas** finales. No hubo errores/advertencias de
+consola ni solicitudes externas.
+
+Se verificaron la fixture 1500×2 + 2000×1 = **5000,00**, cantidades/ids inválidos,
+duplicados, editar/quitar, confirmación y limpieza, LI-7/CL-4 sin perder el
+borrador, snapshots tras cambiar catálogo/cliente y una segunda venta con otro
+id. También texto HTML literal, Tab/Enter, labels, errores accesibles, foco
+visible y recarga que restaura seis libros/tres clientes/sin ventas.
+El redondeo 10.075 dio **10,08** y el extremo seguro de centavos conservó el
+sufijo **,91** en borrador e historial.
+
+A 320/1280 px las medidas y capturas inspeccionadas mostraron la página sin
+desborde horizontal; las tablas anchas se desplazan dentro de su contenedor.
+A 320 px hay que desplazar cada tabla para consultar todas sus columnas.
+
+Evidencia y detalle: `openspec/changes/e5-venta-simulada-historial/validation.md`,
+`browser-aceptacion.json` y `browser-regresion.json` del mismo cambio. Los casos
+browser se automatizaron con herramientas existentes del entorno; no se agregó
+una dependencia al proyecto. Otros motores y lectores de pantalla no fueron
+verificados. **E6 sigue pendiente: ventas y altas se pierden al recargar.**

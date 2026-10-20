@@ -1,0 +1,11 @@
+{
+  "phase": "RED",
+  "bookRegistered": 7,
+  "clientRegistered": 4,
+  "bookOption": 0,
+  "clientOption": 0,
+  "client": "CL-1",
+  "book": "LI-3",
+  "draftPreserved": true,
+  "status": "FAIL"
+}

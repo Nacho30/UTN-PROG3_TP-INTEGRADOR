@@ -110,6 +110,7 @@ function iniciarAltaClientes() {
     mensajeResultado.classList.add("message--info");
     mensajeResultado.textContent = `Cliente «${cliente.nombreCompleto}» dado de alta con el id ${cliente.id}.`;
     renderizarTablaClientes();
+    document.dispatchEvent(new Event("clientes-actualizados"));
   });
 
   formulario.addEventListener("reset", () => {

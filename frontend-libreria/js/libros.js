@@ -236,6 +236,7 @@ function iniciarAltaLibros() {
     mensajeResultado.textContent = `Libro «${libro.titulo}» dado de alta con el id ${libro.id}.`;
     renderizarTablaLibros();
     refrescarCatalogo();
+    document.dispatchEvent(new Event("libros-actualizados"));
   });
 
   formulario.addEventListener("reset", () => {
