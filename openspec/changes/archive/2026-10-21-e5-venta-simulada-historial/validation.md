@@ -131,3 +131,21 @@ auditoría completa de accesibilidad. No se ejecutaron pruebas de la API.
 No hubo fallas actuales ni previas observadas en los escenarios ejecutados;
 el RED de coordinación fue intencional y luego quedó GREEN. No se modificó
 producción durante esta validación independiente.
+
+## Cierre OpenSpec · 21/10/2026
+
+- Se archivó únicamente E5 mediante el CLI en `2026-10-21-e5-venta-simulada-historial`, con sus 9/9 tareas completas. E6 permanece activo (6/9); no se archivó ni modificó.
+- El checkout de referencia al cerrar es `0a16e24`: el frontend está ahora en la raíz y ya integra persistencia localStorage del Ejercicio 6. Los resultados del 19/10/2026 de este documento corresponden a la etapa E5 anterior a E6; sus afirmaciones históricas sobre reinicio y E6 pendiente no describen el estado actual.
+- La especificación principal `openspec/specs/ventas-simuladas/spec.md` se sincronizó antes del archivo. Conserva el propósito, los 9 requisitos y todos los escenarios del delta original. «Sesión efímera antes de E6» mantiene su condición temporal; la actualización de ese contrato corresponde al cierre de E6, fuera de esta acción.
+- Se verificaron 9/9 archivos originales idénticos por hash después de moverlos y antes de añadir esta nota. Se conservaron metadata, artifacts y JSON históricos. Se corrigieron únicamente las dos rutas de evidencia de E5 en el README actual.
+- Validación CLI estricta: 5/5 especificaciones y 5/5 cambios archivados aprobados, sin incidencias. La comparación canónica entre la especificación principal y el delta archivado fue exacta. `openspec list --json` ya no lista E5.
+- El comando de archivo mantuvo la validación activa; `--skip-specs` evitó volver a aplicar la sincronización ya terminada y verificada. No se modificó código funcional ni se repitieron pruebas funcionales por el mero archivado. La auditoría actual del flujo E5 se informa por separado.
+### Auditoría actual de E5: ejecución local y almacenamiento
+
+El validador independiente volvió a ejecutar el flujo de E5 el 21/10/2026 sobre `0a16e24`, en Chromium 151.0.7922.34 con contexto aislado y modo offline, abriendo `file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/index.html`. El informe durable está en [browser-local-audit-20261021.json](browser-local-audit-20261021.json).
+
+- Estado inicial: ninguna venta. Se seleccionó CL-1, se agregó LI-1 con cantidad 2 y se confirmó VE-1 por $ 37.000,00. El borrador quedó limpio y el historial tuvo una fila.
+- Se verificó una venta en `localStorage['paginas-del-sol.estado.v1'].ventas`. Al recargar se restauraron VENTAS y la fila de historial; el snapshot y el detalle permanecieron iguales (**PASS**).
+- Se observaron 20 solicitudes, todas `file://`; solicitudes externas: **0**. Consola: **0 errores y 0 advertencias**. `sessionStorage` vacío y única clave localStorage esperada.
+- La revisión estática delegada de los ocho scripts locales no encontró primitivas de red/API ni URLs HTTP(S). El punto de guardado de la venta es `js/ventas.js:213`, mediante `persistirEstadoBiblioteca(VENTAS)`; lectura, escritura e hidratación local viven en `js/datos.js` y `js/ventas-modelo.js` restaura las ventas guardadas.
+- Alcance: comprobación del flujo E5 actual, sin modificación funcional, sin API y con la persistencia ya incorporada por E6. Esta auditoría acotada no acredita la aceptación completa de E6 ni reemplaza los resultados históricos del 19/10/2026.

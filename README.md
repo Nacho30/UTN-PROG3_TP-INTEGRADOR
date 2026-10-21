@@ -260,7 +260,7 @@ separados en VM y no reemplazan los seis libros ni tres clientes iniciales.
 
 Se aplicaron ciclos RED/GREEN y triangulación; su evidencia por tarea y los
 límites del arnés se encuentran en
-`openspec/changes/e5-venta-simulada-historial/validation.md`. Las pruebas VM y
+`openspec/changes/archive/2026-10-21-e5-venta-simulada-historial/validation.md`. Las pruebas VM y
 los contratos HTML no acreditan por sí solos teclado, presentación ni el
 funcionamiento real con `file://`; la validación de navegador se informa aparte.
 
@@ -283,7 +283,7 @@ A 320/1280 px las medidas y capturas inspeccionadas mostraron la página sin
 desborde horizontal; las tablas anchas se desplazan dentro de su contenedor.
 A 320 px hay que desplazar cada tabla para consultar todas sus columnas.
 
-Evidencia y detalle: `openspec/changes/e5-venta-simulada-historial/validation.md`,
+Evidencia y detalle: `openspec/changes/archive/2026-10-21-e5-venta-simulada-historial/validation.md`,
 `browser-aceptacion.json` y `browser-regresion.json` del mismo cambio. Los casos
 browser se automatizaron con herramientas existentes del entorno; no se agregó
 una dependencia al proyecto. Otros motores y lectores de pantalla no fueron

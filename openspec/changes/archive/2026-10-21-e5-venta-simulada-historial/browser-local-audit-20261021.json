@@ -1,0 +1,387 @@
+{
+  "timestamp": "2026-10-21T06:25:50.752Z",
+  "head": "0a16e24",
+  "browser": "151.0.7922.34",
+  "url": "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/index.html#ventas",
+  "isolatedContext": true,
+  "offline": true,
+  "status": "PASS",
+  "initial": {
+    "keys": [
+      "paginas-del-sol.estado.v1"
+    ],
+    "sessionKeys": [],
+    "stored": {
+      "version": 1,
+      "libros": [
+        {
+          "id": "LI-1",
+          "titulo": "El viento del Aconcagua",
+          "isbn": "978-950-000-001-1",
+          "precio": 18500,
+          "editorialId": "ED-1",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1"
+          ]
+        },
+        {
+          "id": "LI-2",
+          "titulo": "Crónicas del agua y la piedra",
+          "isbn": "978-950-000-002-8",
+          "precio": 15200.5,
+          "editorialId": "ED-2",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-3",
+          "titulo": "La casa de los viñedos",
+          "isbn": "978-950-000-003-5",
+          "precio": 21000,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1",
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-4",
+          "titulo": "Pensar la ciudad",
+          "isbn": "978-950-000-004-2",
+          "precio": 12750,
+          "editorialId": "ED-1",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-5",
+          "titulo": "Cuaderno de viaje",
+          "isbn": "978-950-000-005-9",
+          "precio": 9900,
+          "editorialId": "ED-1",
+          "generoId": null,
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-6",
+          "titulo": "Noches de vendimia",
+          "isbn": "978-950-000-006-6",
+          "precio": 16300,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-2",
+            "AU-3"
+          ]
+        }
+      ],
+      "clientes": [
+        {
+          "id": "CL-1",
+          "nombreCompleto": "Ana Gómez",
+          "email": "ana.gomez@ejemplo.com"
+        },
+        {
+          "id": "CL-2",
+          "nombreCompleto": "Bruno Pérez",
+          "email": "bruno.perez@ejemplo.com"
+        },
+        {
+          "id": "CL-3",
+          "nombreCompleto": "Carla Sosa",
+          "email": "carla.sosa@ejemplo.com"
+        }
+      ],
+      "ventas": []
+    },
+    "sales": 0,
+    "draft": {
+      "clienteId": "",
+      "renglones": []
+    },
+    "historyRows": 0
+  },
+  "confirmed": {
+    "keys": [
+      "paginas-del-sol.estado.v1"
+    ],
+    "sessionKeys": [],
+    "stored": {
+      "version": 1,
+      "libros": [
+        {
+          "id": "LI-1",
+          "titulo": "El viento del Aconcagua",
+          "isbn": "978-950-000-001-1",
+          "precio": 18500,
+          "editorialId": "ED-1",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1"
+          ]
+        },
+        {
+          "id": "LI-2",
+          "titulo": "Crónicas del agua y la piedra",
+          "isbn": "978-950-000-002-8",
+          "precio": 15200.5,
+          "editorialId": "ED-2",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-3",
+          "titulo": "La casa de los viñedos",
+          "isbn": "978-950-000-003-5",
+          "precio": 21000,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1",
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-4",
+          "titulo": "Pensar la ciudad",
+          "isbn": "978-950-000-004-2",
+          "precio": 12750,
+          "editorialId": "ED-1",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-5",
+          "titulo": "Cuaderno de viaje",
+          "isbn": "978-950-000-005-9",
+          "precio": 9900,
+          "editorialId": "ED-1",
+          "generoId": null,
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-6",
+          "titulo": "Noches de vendimia",
+          "isbn": "978-950-000-006-6",
+          "precio": 16300,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-2",
+            "AU-3"
+          ]
+        }
+      ],
+      "clientes": [
+        {
+          "id": "CL-1",
+          "nombreCompleto": "Ana Gómez",
+          "email": "ana.gomez@ejemplo.com"
+        },
+        {
+          "id": "CL-2",
+          "nombreCompleto": "Bruno Pérez",
+          "email": "bruno.perez@ejemplo.com"
+        },
+        {
+          "id": "CL-3",
+          "nombreCompleto": "Carla Sosa",
+          "email": "carla.sosa@ejemplo.com"
+        }
+      ],
+      "ventas": [
+        {
+          "id": "VE-1",
+          "fecha": "2026-10-21T06:25:50.614Z",
+          "cliente": {
+            "id": "CL-1",
+            "nombreCompleto": "Ana Gómez",
+            "email": "ana.gomez@ejemplo.com"
+          },
+          "renglones": [
+            {
+              "libroId": "LI-1",
+              "titulo": "El viento del Aconcagua",
+              "isbn": "978-950-000-001-1",
+              "cantidad": 2,
+              "precioUnitarioCentavos": 1850000,
+              "subtotalCentavos": 3700000
+            }
+          ],
+          "totalCentavos": 3700000
+        }
+      ]
+    },
+    "sales": 1,
+    "draft": {
+      "clienteId": "",
+      "renglones": []
+    },
+    "historyRows": 1
+  },
+  "reloaded": {
+    "keys": [
+      "paginas-del-sol.estado.v1"
+    ],
+    "sessionKeys": [],
+    "stored": {
+      "version": 1,
+      "libros": [
+        {
+          "id": "LI-1",
+          "titulo": "El viento del Aconcagua",
+          "isbn": "978-950-000-001-1",
+          "precio": 18500,
+          "editorialId": "ED-1",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1"
+          ]
+        },
+        {
+          "id": "LI-2",
+          "titulo": "Crónicas del agua y la piedra",
+          "isbn": "978-950-000-002-8",
+          "precio": 15200.5,
+          "editorialId": "ED-2",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-3",
+          "titulo": "La casa de los viñedos",
+          "isbn": "978-950-000-003-5",
+          "precio": 21000,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1",
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-4",
+          "titulo": "Pensar la ciudad",
+          "isbn": "978-950-000-004-2",
+          "precio": 12750,
+          "editorialId": "ED-1",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-5",
+          "titulo": "Cuaderno de viaje",
+          "isbn": "978-950-000-005-9",
+          "precio": 9900,
+          "editorialId": "ED-1",
+          "generoId": null,
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-6",
+          "titulo": "Noches de vendimia",
+          "isbn": "978-950-000-006-6",
+          "precio": 16300,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-2",
+            "AU-3"
+          ]
+        }
+      ],
+      "clientes": [
+        {
+          "id": "CL-1",
+          "nombreCompleto": "Ana Gómez",
+          "email": "ana.gomez@ejemplo.com"
+        },
+        {
+          "id": "CL-2",
+          "nombreCompleto": "Bruno Pérez",
+          "email": "bruno.perez@ejemplo.com"
+        },
+        {
+          "id": "CL-3",
+          "nombreCompleto": "Carla Sosa",
+          "email": "carla.sosa@ejemplo.com"
+        }
+      ],
+      "ventas": [
+        {
+          "id": "VE-1",
+          "fecha": "2026-10-21T06:25:50.614Z",
+          "cliente": {
+            "id": "CL-1",
+            "nombreCompleto": "Ana Gómez",
+            "email": "ana.gomez@ejemplo.com"
+          },
+          "renglones": [
+            {
+              "libroId": "LI-1",
+              "titulo": "El viento del Aconcagua",
+              "isbn": "978-950-000-001-1",
+              "cantidad": 2,
+              "precioUnitarioCentavos": 1850000,
+              "subtotalCentavos": 3700000
+            }
+          ],
+          "totalCentavos": 3700000
+        }
+      ]
+    },
+    "sales": 1,
+    "draft": {
+      "clienteId": "",
+      "renglones": []
+    },
+    "historyRows": 1
+  },
+  "message": "Venta VE-1 confirmada por $ 37.000,00. Podés consultar su detalle en Historial o iniciar otra venta.",
+  "detail": "Detalle de VE-1\n\n21/10/2026, 03:25:50 · Ana Gómez (CL-1) · ana.gomez@ejemplo.com\n\nLibro\tISBN\tCantidad\tPrecio unitario\tSubtotal\nEl viento del Aconcagua (LI-1)\t978-950-000-001-1\t2\t$ 18.500,00\t$ 37.000,00\n\nTotal: $ 37.000,00",
+  "external": [],
+  "errors": [],
+  "warnings": [],
+  "requests": [
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/index.html",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/index.html",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+    "file:///F:/TPS/UTN-PROG3_TP-INTEGRADOR/js/ventas.js"
+  ]
+}
