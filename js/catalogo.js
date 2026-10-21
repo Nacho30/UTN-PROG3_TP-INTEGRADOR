@@ -69,23 +69,25 @@ function validarRelacionesLibros(libros) {
 
 /* ---------- Filtro por título ---------- */
 
-/** Quita espacios en los extremos y pasa a minúsculas. */
+/** Quita espacios y diacríticos, y pasa a minúsculas para comparar títulos. */
 function normalizarBusqueda(texto) {
-  return texto.trim().toLocaleLowerCase("es");
+  return texto
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("es");
 }
 
 /**
- * Filtra por coincidencia parcial del título, sin distinguir mayúsculas.
- * Una búsqueda vacía (o solo espacios) devuelve todo el catálogo.
+ * Filtra por coincidencia parcial del título, sin distinguir mayúsculas ni
+ * acentos. Una búsqueda vacía (o solo espacios) devuelve todo el catálogo.
  */
 function filtrarPorTitulo(libros, busqueda) {
   const termino = normalizarBusqueda(busqueda);
   if (termino === "") {
     return libros;
   }
-  return libros.filter((libro) =>
-    libro.titulo.toLocaleLowerCase("es").includes(termino)
-  );
+  return libros.filter((libro) => normalizarBusqueda(libro.titulo).includes(termino));
 }
 
 /* ---------- Renderizado ---------- */

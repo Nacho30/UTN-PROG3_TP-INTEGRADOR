@@ -18,6 +18,8 @@ test('ids usan mayor sufijo y búsqueda exige id exacto', () => {
 test('E3: filtro normalizado, vacío y sin coincidencias', () => {
   const run = contexto();
   assert.equal(run('filtrarPorTitulo(LIBROS, "  VIEN  ").length'), 1);
+  assert.equal(run('filtrarPorTitulo([{ titulo: "Árbol de papel" }], "arbol").length'), 1);
+  assert.equal(run('filtrarPorTitulo([{ titulo: "Camión nocturno" }], "  CAMION ").length'), 1);
   assert.equal(run('filtrarPorTitulo(LIBROS, "  ").length'), 6);
   assert.equal(run('filtrarPorTitulo(LIBROS, "zzzzz").length'), 0);
 });

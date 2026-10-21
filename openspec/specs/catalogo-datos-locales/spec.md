@@ -49,12 +49,17 @@ dos decimales. Los datos MUST insertarse con `textContent` o
 
 ### Requirement: Filtro por título
 El filtro SHALL buscar coincidencias parciales en el título sin distinguir
-mayúsculas de minúsculas e ignorando los espacios de los extremos. MUST
-filtrar mientras se escribe y MUST NOT recargar la página al presionar Enter.
+mayúsculas, minúsculas ni diacríticos, e ignorando los espacios de los
+extremos. MUST filtrar mientras se escribe y MUST NOT recargar la página al
+presionar Enter.
 
 #### Scenario: Búsqueda normalizada
 - **WHEN** se escribe «  VIEN  »
 - **THEN** sólo se muestra «El viento del Aconcagua»
+
+#### Scenario: Búsqueda sin diacríticos
+- **WHEN** se busca «arbol» y existe un título «Árbol de papel»
+- **THEN** el título aparece como coincidencia
 
 #### Scenario: Búsqueda vacía
 - **WHEN** la búsqueda está vacía o tiene sólo espacios

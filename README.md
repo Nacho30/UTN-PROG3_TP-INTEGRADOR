@@ -123,8 +123,10 @@ existan y avisa en la consola si alguna falla.
 - El catálogo se genera desde el array `LIBROS`: cada tarjeta muestra título,
   ISBN, editorial, género, autores y precio (con dos decimales).
 - El filtro por título quita los espacios de los extremos, no distingue
-  mayúsculas de minúsculas y busca coincidencias parciales. Filtra mientras se
-  escribe; Enter no recarga la página.
+  mayúsculas, minúsculas ni acentos y busca coincidencias parciales. Filtra
+  mientras se escribe; Enter no recarga la página.
+- La búsqueda sin acentos se cubre también en la prueba CJS: «arbol» encuentra
+  «Árbol de papel» y «CAMION» encuentra «Camión nocturno».
 - Búsqueda vacía → catálogo completo. Sin coincidencias → mensaje
   «Sin resultados…» con el texto buscado. Catálogo vacío → mensaje propio.
 - Todo el contenido se inserta con `textContent`, por lo que lo que escribe el
