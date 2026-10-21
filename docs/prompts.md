@@ -295,64 +295,78 @@ Entregables → Entrega.
 ## TPI Frontend · Ejercicio 6: Persistencia local
 
 ```text
-Rol: Actuá como orquestador técnico de un equipo de desarrollo.
+Objetivo:
+Implementá y cerrá únicamente el Ejercicio 6 del TPI de librería: persistencia
+local de libros, clientes y ventas. Trabajá sobre la raíz actual del repositorio
+(`index.html`, `js/`, `tests/`, `README.md` y `openspec/`), no sobre rutas
+históricas como `frontend-libreria/`.
 
-Contexto:
-El proyecto incluye `frontend-libreria/`, una aplicación estática de librería
-realizada con HTML, CSS y JavaScript nativos. Ya implementa catálogo, altas de
-libros y clientes, ventas simuladas e historial con snapshots en memoria.
+Contexto verificable:
+- La app es estática y se abre directamente con `file://`.
+- E3, E4 y E5 ya aportan catálogo, altas, venta simulada e historial de
+  snapshots. E6 debe preservar esos contratos.
+- Hay un cambio OpenSpec de E6; el CLI es la fuente de verdad. Antes de editar,
+  ejecutá `openspec list --json` y
+  `openspec status --change "<cambio-e6>" --json` desde la raíz del repo.
 
-Modo de trabajo:
-- Como orquestador, revisá la consigna, el cambio OpenSpec, el checkout y las
-  pruebas existentes antes de editar.
-- Delegá la implementación a un agente y proporcionale los requisitos,
-  restricciones y patrones detectados.
-- Exigí TDD con baseline, RED, GREEN, triangulación y refactor en la suite CJS.
-- Integrá el resultado, validá los casos manuales disponibles y no declares
-  como ejecutada ninguna evidencia que el entorno no haya permitido realizar.
+Alcance funcional:
+1. Usá una única clave de `localStorage` con un sobre JSON versionado que
+   contenga `libros`, `clientes` y `ventas`.
+2. En la primera apertura, cloná y guardá las semillas actuales; en reaperturas,
+   restaurá el estado válido antes de iniciar la UI, sin duplicar ejemplos ni
+   perder altas o ventas previas.
+3. Persistí sólo después de un alta válida de libro o cliente y de una venta
+   confirmada. No guardes formularios inválidos ni el borrador de venta.
+4. Conservá los renglones de una venta como snapshots: cambiar después el precio
+   del catálogo persistido no puede alterar precio unitario, subtotales ni total
+   del historial.
+5. Si `localStorage` está bloqueado, lleno o contiene JSON inválido, mantené la
+   sesión utilizable y mostrá un mensaje textual honesto; no afirmes que se
+   guardó algo que no se pudo guardar.
 
-Tarea:
-Implementar el Ejercicio 6: persistir libros, clientes y ventas en
-`localStorage` al abrir `frontend-libreria/index.html` directamente desde el
-disco. En la primera apertura deben cargarse y guardarse los ejemplos; en las
-siguientes se debe restaurar el estado sin duplicarlos.
+Restricciones no negociables:
+- Sólo HTML, CSS y JavaScript nativos ya incluidos localmente.
+- Sin APIs, `fetch`, backend, servidor, CDN, framework, librerías, módulos ES,
+  IndexedDB, `sessionStorage`, llamadas de red ni cambios al backend ajeno.
+- Conservá la navegación, validaciones, accesibilidad, catálogo y apertura por
+  `file://`. Los mensajes y la documentación van en español.
 
-Requisitos:
-- Usar un único estado versionado que agrupe libros, clientes y ventas.
-- Persistir solamente altas válidas y ventas confirmadas; no guardar borradores
-  ni formularios inválidos.
-- Mantener snapshots históricos: si cambia el precio del catálogo guardado,
-  una venta anterior conserva precio unitario, subtotales y total originales.
-- Conservar el funcionamiento de catálogo, validaciones, navegación,
-  accesibilidad y apertura por `file://`.
-- Documentar clave, estructura, reinicio, aislamiento por navegador/perfil/
-  origen y resultados de las verificaciones reproducibles.
+Proceso y verificación:
+- Leé la especificación, diseño y tareas del cambio antes de implementar.
+- Si hay runner, primero ejecutá la línea de base. Para cada comportamiento
+  nuevo seguí RED → GREEN → triangulación → refactor; no escribas producción
+  antes de su prueba que falla.
+- Agregá pruebas CJS aisladas que cubran primera carga, restauración válida,
+  recuperación de estado inválido, reapertura sin duplicados, altas, venta de
+  $1.500 × 2 + $2.000 × 1 = $5.000 y precio histórico.
+- Ejecutá la suite completa con `node --test tests/*.test.cjs` y registrá el
+  resultado real. Validá con navegador los flujos de recarga, venta, historial,
+  teclado y anchos 320/1280 px cuando el entorno lo permita. Si no se puede
+  abrir `file://`, dejalo pendiente: nunca lo marques como aprobado.
 
-Restricciones:
-- Solo HTML, CSS y JavaScript nativos locales.
-- Sin frameworks, librerías, CDN, backend, API, `fetch` ni llamadas de red.
-- No modificar el backend FastAPI ni mezclar los dos proyectos del repositorio.
-
-Entregables:
-1. Persistencia y restauración en los scripts de `frontend-libreria/js/`.
-2. Pruebas CJS aisladas para semillas, estado inválido, altas, venta de $5000
-   y precio histórico.
-3. README actualizado con procedimiento de validación y alcance de los datos.
-4. Tareas OpenSpec actualizadas con evidencia de pruebas y limitaciones reales.
+Documentación y cierre:
+- Actualizá el README con la clave y estructura, origen/navegador/perfil,
+  reinicio, procedimiento para comprobar el precio histórico y resultados
+  ejecutados (incluidas limitaciones reales).
+- Guardá una evidencia de validación en el cambio OpenSpec y actualizá las
+  tareas sólo con evidencia existente.
+- Sincronizá la spec principal y archivá el cambio sólo cuando todas las tareas
+  estén realmente terminadas; el archivo debe quedar en
+  `openspec/changes/archive/` junto a los ejercicios anteriores.
 
 Entrega:
-Dejar los cambios listos para revisión en la rama de trabajo. Informar archivos
-modificados, resultados de pruebas, decisiones y cualquier validación manual
-que requiera ejecutarse en un navegador local.
+Informá los archivos cambiados, la clave elegida, las pruebas ejecutadas y su
+resultado. Si una validación manual o el archivado queda bloqueado, indicá la
+causa concreta y el único paso pendiente, sin inventar evidencia.
 ```
 
-**Metodología aplicada:** el orquestador recuperó la consigna y el estado del
-cambio OpenSpec, coordinó la implementación y contrastó los resultados; el
-agente de implementación trabajó con TDD y mantuvo el alcance estático y nativo
-del frontend.
+**Mejoras incorporadas:** corrige las rutas para este checkout, delimita de
+forma explícita `localStorage` y los snapshots históricos, incluye el comando
+real de pruebas y evita archivar o declarar aprobada una validación sin
+evidencia.
 
-**Estructura del prompt:** Rol → Contexto → Modo de trabajo → Tarea →
-Requisitos → Restricciones → Entregables → Entrega.
+**Estructura del prompt:** Objetivo → Contexto → Alcance → Restricciones →
+Proceso y verificación → Documentación y cierre → Entrega.
 
 ---
 

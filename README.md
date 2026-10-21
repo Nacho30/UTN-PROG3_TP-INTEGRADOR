@@ -337,10 +337,10 @@ la prueba pedagógica:
 
 ### Evidencia automatizada E6
 
-La suite CJS se ejecutó el 20/10/2026 con:
+La suite CJS se ejecutó el 21/10/2026 con:
 
 ```powershell
-node --test tests
+node --test tests/*.test.cjs
 ```
 
 Resultado: **22/22 pruebas aprobadas**, sin dependencias externas. Las cinco
@@ -350,11 +350,12 @@ libro/cliente, venta de $ 5000,00 y precio histórico tras modificar únicamente
 el catálogo persistido. Las 17 pruebas E3-E5 existentes también se mantuvieron
 verdes.
 
-### Casos manuales E6 a reproducir
+### Casos manuales E6 pendientes de ejecución local
 
-El entorno de esta implementación no permitió abrir una URL `file://` con la
-automatización disponible, por lo que no se declara una validación visual como
-ejecutada. Antes de entregar, abrí `index.html` con doble clic y registrá el
+La suite CJS no reemplaza una comprobación en navegador. La automatización
+disponible para esta revisión bloqueó las URL `file://`; por eso **no se declara
+como aprobada** una validación visual ni de teclado. Antes de entregar, abrí
+`index.html` con doble clic, usá una copia limpia del navegador y registrá el
 resultado observado de los siguientes casos:
 
 | Caso | Resultado esperado |
