@@ -121,83 +121,84 @@ antes de publicarla.
 
 ---
 
-## TPI Frontend · Ejercicio 3: Datos locales, catálogo y filtro
+## Ejercicio 3 · Datos locales, catálogo y filtro
 
 ```text
-Rol: Sos un desarrollador front-end con experiencia en HTML semántico, CSS
-propio y JavaScript nativo, con foco en modelado de datos, renderizado del DOM
-y código legible.
+Rol: Actuá como orquestador técnico de un equipo de desarrollo.
 
 Contexto:
-Adjunto la consigna «TPI: frontend de una librería». El repositorio
-https://github.com/Nacho30/UTN-PROG3_TP-INTEGRADOR contiene hoy el TP backend
-(API FastAPI en app/ e interfaz de proveedores en app/static/). El frontend de
-la librería es un proyecto independiente que debe abrirse con doble clic en
-index.html, sin npm, servidor, API ni CDN.
+El proyecto es una librería estática que se abre directamente desde
+`index.html`. Sus recursos están en `css/` y `js/`; no usa servidor, backend,
+API, dependencias instaladas ni recursos externos. El Ejercicio 3 consiste en
+definir los datos de la librería en variables de JavaScript y mostrarlos en un
+catálogo con filtro por título. En este ejercicio los datos viven sólo en
+memoria: todavía no se persisten en `localStorage`.
+
+Modo de trabajo:
+- Como orquestador, revisá la consigna, los cambios OpenSpec archivados de los
+  Ejercicios 1 y 2, el checkout y las pruebas existentes antes de editar.
+- Delegá a un agente la revisión o implementación puntual, con los requisitos
+  y límites comprobados.
+- Integrá el resultado y registrá sólo evidencia ejecutada; si el
+  comportamiento actual ya cumple los escenarios, no modifiques el código.
+- Formalizá el ejercicio como cambio OpenSpec, sincronizá la spec principal y
+  archivalo siguiendo el mismo formato de los ejercicios anteriores.
 
 Tarea:
-Implementar SOLO el Ejercicio 3 «Datos locales, catálogo y filtro».
+Aplicar y verificar los datos locales, el catálogo y el filtro por título de
+la librería, sin alterar las vistas Libros, Clientes, Ventas e Historial.
 
-1. Estructura del proyecto:
-   - Crear la carpeta frontend-libreria/ con index.html, css/styles.css y js/.
-   - Cargar los scripts como scripts clásicos con defer (sin módulos ES), para
-     que funcionen abriendo el archivo desde el disco (file://).
-
-2. Datos locales (js/datos.js):
-   - Definir EDITORIALES, GENEROS, AUTORES, LIBROS y CLIENTES con datos
-     ficticios e identificadores estables (ED-1, GE-1, AU-1, LI-1, CL-1).
-   - Relacionar los libros por id: editorialId (obligatoria), generoId
-     (opcional, null = «Sin clasificar») y autorIds (uno o más).
-   - Incluir al menos un libro sin género para mostrar «Sin clasificar».
-   - Al iniciar, validar que todas las relaciones existan e informar en la
-     consola cualquier inconsistencia.
-
-3. Catálogo (js/catalogo.js):
-   - Generar las tarjetas desde el array LIBROS, mostrando título, ISBN,
-     editorial, género, autores y precio en ARS con dos decimales.
-   - Resolver los nombres de editorial, género y autores a partir de sus ids.
-
-4. Filtro por título:
-   - Ignorar espacios en los extremos y diferencias entre mayúsculas y
-     minúsculas; aceptar coincidencias parciales.
-   - Filtrar mientras se escribe; Enter no debe recargar la página.
-   - Búsqueda vacía muestra el catálogo completo; sin coincidencias, mostrar
-     un mensaje en texto.
-   - Insertar todo dato con textContent/createElement, nunca con innerHTML.
+Requisitos:
+- Declarar `EDITORIALES`, `GENEROS`, `AUTORES`, `LIBROS` y `CLIENTES` como
+  variables en `js/datos.js`, con datos ficticios e ids estables (`ED-1`,
+  `GE-1`, `AU-1`, `LI-1`, `CL-1`).
+- Relacionar los libros por id: `editorialId` (obligatoria), `generoId`
+  (opcional, `null` = «Sin clasificar») y `autorIds` (uno o más). Validar las
+  relaciones al iniciar e informar inconsistencias en la consola.
+- Generar el catálogo desde la variable `LIBROS`, mostrando título, ISBN,
+  editorial, género, autores y precio en ARS con dos decimales.
+- Filtrar por título con coincidencia parcial, sin distinguir mayúsculas e
+  ignorando espacios en los extremos; filtrar mientras se escribe y evitar que
+  Enter recargue la página.
+- Búsqueda vacía muestra el catálogo completo; sin coincidencias, mostrar un
+  mensaje en texto.
+- Insertar los datos con `createElement` y `textContent`, nunca con
+  `innerHTML`.
 
 Restricciones:
-- Únicamente HTML, CSS y JavaScript nativo incluidos en el proyecto: sin
-  frameworks, librerías ni CDNs.
-- No modificar la API de Python, app/static/ ni los tests de la API.
-- No implementar altas, ventas, historial ni persistencia (Ejercicios 4 a 6).
-- Mensajes, comentarios y nombres de archivos/variables en español.
+- Usá exclusivamente HTML, CSS y JavaScript nativos incluidos localmente.
+- No uses CDN, frameworks, `fetch`, API, backend, llamadas de red ni recursos
+  remotos.
+- Guardá los datos sólo en variables: no uses `localStorage`,
+  `sessionStorage` ni IndexedDB (la persistencia corresponde al Ejercicio 6).
+- Debe abrir correctamente con `file://`, sin requerir servidor.
+- Mantené el código y los mensajes de la interfaz en español.
 
 Entregables:
-1. frontend-libreria/ con index.html, css/styles.css, js/datos.js y
-   js/catalogo.js.
-2. frontend-libreria/README.md con instrucciones de apertura, estructura,
-   modelo de datos, estado de los ejercicios y pendientes.
-3. Verificación manual, registrando en el README el resultado observado real:
-   - búsqueda con espacios y mayúsculas, coincidencia parcial, búsqueda vacía
-     y búsqueda sin resultados;
-   - texto con etiquetas HTML mostrado de forma literal;
-   - libro sin género mostrado como «Sin clasificar»;
-   - foco visible y recorrido por teclado; vistas de 320 px y 1280 px sin
-     desplazamiento horizontal de la página; consola sin errores.
+1. Datos locales en `js/datos.js` y catálogo con filtro en `js/catalogo.js`.
+2. Cambio OpenSpec archivado del Ejercicio 3 (propuesta, diseño, spec delta,
+   tareas y evidencia) y spec principal sincronizada.
+3. Verificación con `file://` de datos, relaciones, catálogo, casos del
+   filtro, texto con etiquetas HTML, ausencia de accesos a `localStorage` y de
+   peticiones de red, foco visible, consola y vistas de 320 px y 1280 px.
+4. Ejecución de la suite CJS existente.
 
 Entrega:
-Instalá o ejecutá lo que sea necesario para verificar el trabajo. Subí los
-cambios a la rama main en un único commit con mensaje descriptivo en español
-e informá los archivos modificados, los casos verificados y cualquier
-pendiente.
+Publicá los cambios en la rama `main` en un único commit descriptivo en
+español. Informá los archivos modificados, las verificaciones realizadas y
+cualquier limitación real de la validación.
 ```
 
-**Decisión de alcance:** como el repositorio contenía el TP backend, el
-frontend se creó en una carpeta nueva (`frontend-libreria/`) sin modificar la
-API ni `app/static/`.
+**Metodología aplicada:** el orquestador revisó la consigna, los cambios
+OpenSpec de los ejercicios anteriores y el estado del repositorio, y coordinó
+la verificación del catálogo en Chromium con `file://`. Para comprobar que el
+ejercicio funciona sólo con variables en memoria, la página se abrió con la
+persistencia del Ejercicio 6 desactivada y se contaron los accesos a
+`localStorage` (cero). Con esa evidencia se archivó el cambio
+`e3-datos-catalogo-filtro` y se sincronizó la spec `catalogo-datos-locales`.
 
-**Estructura del prompt:** Rol → Contexto → Tarea → Restricciones →
-Entregables → Entrega.
+**Estructura del prompt:** Rol → Contexto → Modo de trabajo → Tarea → Requisitos
+→ Restricciones → Entregables → Entrega.
 
 ---
 
