@@ -9,7 +9,7 @@ CDNs, API, backend ni servidor. Los datos son ficticios y viven en el navegador.
 ## Integrantes
 
 Según el historial del repositorio: Ezequiel Menéndez, Ignacio Martín Rodríguez,
-Mateo Algañaraz, Nicolás Morón y Santiago (Santiago-Btto).
+Mateo Algañaraz, Nicolás Morón y Santiago Barretto.
 
 ## Cómo abrirlo
 
