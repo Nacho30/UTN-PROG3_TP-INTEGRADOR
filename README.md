@@ -17,6 +17,28 @@ Mateo Algañaraz, Nicolás Morón y Santiago Barretto.
 2. Abrir `index.html` (en la raíz del repositorio) con doble clic en cualquier
    navegador actual. No hace falta npm, ni instalar nada, ni levantar un servidor.
 
+## Navegación entre vistas
+
+Todo el sitio es una sola página (`index.html`) con cinco secciones. El menú del
+encabezado lleva a cada una mediante anclas, y la URL cambia según la vista:
+
+| Vista | Enlace | Qué contiene |
+|-------|--------|--------------|
+| Catálogo | `index.html#catalogo` | Buscador por título y tarjetas de los libros |
+| Libros | `index.html#libros` | Formulario de alta y tabla de libros registrados |
+| Clientes | `index.html#clientes` | Formulario de alta y tabla de clientes registrados |
+| Ventas | `index.html#ventas` | Cliente, renglones editables, total y confirmación |
+| Historial | `index.html#historial` | Ventas confirmadas y su detalle (sólo consulta) |
+
+El enlace de la vista activa queda marcado con `aria-current="page"`
+(`js/navegacion.js`). Se puede recorrer todo con el teclado: Tab avanza por los
+controles con foco visible y el primer Tab ofrece «Saltar al contenido principal».
+
+## Imágenes
+
+El proyecto no usa imágenes ni otros recursos ajenos: la marca «PS» del
+encabezado es texto con estilos propios.
+
 ## Ejercicio 5 · Reglas de la venta simulada
 
 Se redondea cada precio al centavo más cercano antes de multiplicar. Cantidades,
@@ -91,7 +113,8 @@ docs/prompts.md        Prompts usados con IA
 - **Libros** (Ejercicio 4): alta de libros con validaciones y tabla de listado.
 - **Clientes** (Ejercicio 4): alta de clientes con validaciones y tabla de listado.
 - **Ventas** (Ejercicio 5): cliente, renglones editables y confirmación simulada.
-- **Historial** (Ejercicio 5): lista y detalle de snapshots confirmados de la sesión.
+- **Historial** (Ejercicio 5): lista y detalle de las ventas confirmadas, que se
+  conservan entre aperturas gracias al Ejercicio 6.
 
 ### Qué queda pendiente
 
@@ -280,7 +303,9 @@ Se verificaron la fixture 1500×2 + 2000×1 = **5000,00**, cantidades/ids invál
 duplicados, editar/quitar, confirmación y limpieza, LI-7/CL-4 sin perder el
 borrador, snapshots tras cambiar catálogo/cliente y una segunda venta con otro
 id. También texto HTML literal, Tab/Enter, labels, errores accesibles, foco
-visible y recarga que restaura seis libros/tres clientes/sin ventas.
+visible y recarga que restaura seis libros/tres clientes/sin ventas. Esa última
+observación es anterior al Ejercicio 6: desde entonces la recarga conserva las
+altas y ventas (ver «Casos manuales E6»).
 El redondeo 10.075 dio **10,08** y el extremo seguro de centavos conservó el
 sufijo **,91** en borrador e historial.
 
