@@ -1,0 +1,1103 @@
+{
+  "baseline": {
+    "command": "node --test tests/*.test.cjs",
+    "pass": 22,
+    "fail": 0,
+    "note": "ejecutado en raíz del repo antes del harness; 22/22 PASS"
+  },
+  "feasibility": {
+    "typeofLocalStorage": "object",
+    "getItemBeforeReload": {
+      "length": 1180,
+      "version": 1,
+      "libros": 6,
+      "clientes": 3,
+      "ventas": 0
+    },
+    "getItemAfterReload": {
+      "length": 1180,
+      "version": 1,
+      "libros": 6,
+      "clientes": 3,
+      "ventas": 0
+    },
+    "persistsAcrossReload": true
+  },
+  "initial": {
+    "keys": [
+      "paginas-del-sol.estado.v1"
+    ],
+    "stored": {
+      "version": 1,
+      "libros": [
+        {
+          "id": "LI-1",
+          "titulo": "El viento del Aconcagua",
+          "isbn": "978-950-000-001-1",
+          "precio": 18500,
+          "editorialId": "ED-1",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1"
+          ]
+        },
+        {
+          "id": "LI-2",
+          "titulo": "Crónicas del agua y la piedra",
+          "isbn": "978-950-000-002-8",
+          "precio": 15200.5,
+          "editorialId": "ED-2",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-3",
+          "titulo": "La casa de los viñedos",
+          "isbn": "978-950-000-003-5",
+          "precio": 21000,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-1",
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-4",
+          "titulo": "Pensar la ciudad",
+          "isbn": "978-950-000-004-2",
+          "precio": 12750,
+          "editorialId": "ED-1",
+          "generoId": "GE-2",
+          "autorIds": [
+            "AU-3"
+          ]
+        },
+        {
+          "id": "LI-5",
+          "titulo": "Cuaderno de viaje",
+          "isbn": "978-950-000-005-9",
+          "precio": 9900,
+          "editorialId": "ED-1",
+          "generoId": null,
+          "autorIds": [
+            "AU-2"
+          ]
+        },
+        {
+          "id": "LI-6",
+          "titulo": "Noches de vendimia",
+          "isbn": "978-950-000-006-6",
+          "precio": 16300,
+          "editorialId": "ED-2",
+          "generoId": "GE-1",
+          "autorIds": [
+            "AU-2",
+            "AU-3"
+          ]
+        }
+      ],
+      "clientes": [
+        {
+          "id": "CL-1",
+          "nombreCompleto": "Ana Gómez",
+          "email": "ana.gomez@ejemplo.com"
+        },
+        {
+          "id": "CL-2",
+          "nombreCompleto": "Bruno Pérez",
+          "email": "bruno.perez@ejemplo.com"
+        },
+        {
+          "id": "CL-3",
+          "nombreCompleto": "Carla Sosa",
+          "email": "carla.sosa@ejemplo.com"
+        }
+      ],
+      "ventas": []
+    },
+    "dom": {
+      "librosFilas": 6,
+      "clientesFilas": 3,
+      "historialFilas": 0,
+      "historialVacio": true,
+      "ventaTotal": "$ 0,00",
+      "ventaRenglones": 0
+    }
+  },
+  "cases": [
+    {
+      "id": 1,
+      "description": "Búsqueda con mayúsculas/espacios «  VIEN », vacía e inexistente, verificada también tras recarga",
+      "status": "PASS",
+      "observed": {
+        "vien": {
+          "mensaje": "1 libro coincide con «VIEN».",
+          "coincidencias": 1
+        },
+        "vacia": {
+          "mensaje": "Mostrando los 6 libros del catálogo.",
+          "tarjetas": 6
+        },
+        "inexistente": {
+          "mensaje": "Sin resultados: ningún título contiene «zzz inexistente». Probá con otra palabra o borrá la búsqueda.",
+          "tarjetas": 0
+        },
+        "trasRecarga": {
+          "mensaje": "1 libro coincide con «VIEN».",
+          "coincidencias": 1
+        }
+      }
+    },
+    {
+      "id": 2,
+      "description": "ISBN repetido rechazado; alta válida «Prueba E6» (LI-7, 1500) y libro 2000 (LI-8); persisten tras recarga",
+      "status": "PASS",
+      "observed": {
+        "duplicado": {
+          "errores": "El ISBN ya está registrado: al comparar se ignoran espacios, guiones y mayúsculas.",
+          "filasTrasDuplicado": 6
+        },
+        "altaValida": {
+          "mensaje": "Libro «Prueba E6» dado de alta con el id LI-7.",
+          "filas": 7,
+          "ultimaFila": "LI-7 | Prueba E6 | 978 950 000 009 7 | $ 1.500,00 | Editorial Cordillera | Sin clasificar | Lucía Benavídez"
+        },
+        "altaLibro2000": {
+          "mensaje": "Libro «Prueba E6 B» dado de alta con el id LI-8.",
+          "filas": 8
+        },
+        "trasRecarga": {
+          "filas": 8,
+          "ids": [
+            "LI-1",
+            "LI-2",
+            "LI-3",
+            "LI-4",
+            "LI-5",
+            "LI-6",
+            "LI-7",
+            "LI-8"
+          ],
+          "enAlmacenamiento": [
+            "LI-1",
+            "LI-2",
+            "LI-3",
+            "LI-4",
+            "LI-5",
+            "LI-6",
+            "LI-7",
+            "LI-8"
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "description": "Email inválido y duplicado en mayúsculas rechazados; alta CL-4 persistida tras recarga",
+      "status": "PASS",
+      "observed": {
+        "invalido": {
+          "errores": "El email no tiene un formato válido (ejemplo: nombre@dominio.com).",
+          "filas": 3
+        },
+        "duplicadoMayusculas": {
+          "errores": "El email ya está registrado: al comparar se ignoran espacios y mayúsculas.",
+          "filas": 3
+        },
+        "altaValida": {
+          "mensaje": "Cliente «Prueba E6 Cliente» dado de alta con el id CL-4.",
+          "filas": 4,
+          "ultimaFila": "CL-4 | Prueba E6 Cliente | prueba.e6@ejemplo.com"
+        },
+        "trasRecarga": {
+          "filas": 4,
+          "ids": [
+            "CL-1",
+            "CL-2",
+            "CL-3",
+            "CL-4"
+          ],
+          "enAlmacenamiento": [
+            "CL-1",
+            "CL-2",
+            "CL-3",
+            "CL-4"
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "description": "Ventas inválidas (sin cliente, sin renglones, cantidades 0/negativa/decimal, libro repetido): nada confirmado ni persistido",
+      "status": "PASS",
+      "observed": {
+        "sinClienteSinRenglones": {
+          "errores": "Debe seleccionar un cliente existente.Agregá al menos un libro a la venta.",
+          "historialFilas": 0
+        },
+        "sinRenglones": {
+          "errores": "Agregá al menos un libro a la venta.",
+          "historialFilas": 0
+        },
+        "cantidades": [
+          {
+            "cantidad": "0",
+            "errores": "Renglón 1: la cantidad debe ser un entero mayor que cero y seguro.",
+            "renglones": 0,
+            "ariaInvalid": "true"
+          },
+          {
+            "cantidad": "-2",
+            "errores": "Renglón 1: la cantidad debe ser un entero mayor que cero y seguro.",
+            "renglones": 0,
+            "ariaInvalid": "true"
+          },
+          {
+            "cantidad": "1.5",
+            "errores": "Renglón 1: la cantidad debe ser un entero mayor que cero y seguro.",
+            "renglones": 0,
+            "ariaInvalid": "true"
+          }
+        ],
+        "libroRepetido": {
+          "trasAlta": {
+            "renglones": 1,
+            "total": "$ 3.000,00",
+            "errores": ""
+          },
+          "trasRepetido": {
+            "errores": "Renglón 2: el libro ya está en la venta; modificá su cantidad.",
+            "renglones": 1,
+            "total": "$ 3.000,00"
+          }
+        },
+        "trasRechazoRepetido": {
+          "historialFilas": 0,
+          "ventasEnAlmacenamiento": 0
+        },
+        "trasRecarga": {
+          "ventasEnAlmacenamiento": 0,
+          "historialFilas": 0,
+          "historialVacio": true,
+          "ventasAntesRecarga": 0
+        }
+      }
+    },
+    {
+      "id": 5,
+      "description": "Venta válida 2×1500 + 1×2000: subtotales 3000,00/2000,00, total 5000,00, VE-1 persiste en historial",
+      "status": "PASS",
+      "observed": {
+        "borrador": [
+          {
+            "libro": "Prueba E6 (LI-7)",
+            "cantidad": "2",
+            "precioUnitario": "$ 1.500,00",
+            "subtotal": "$ 3.000,00"
+          },
+          {
+            "libro": "Prueba E6 B (LI-8)",
+            "cantidad": "1",
+            "precioUnitario": "$ 2.000,00",
+            "subtotal": "$ 2.000,00"
+          }
+        ],
+        "borradorTotal": "$ 5.000,00",
+        "mensaje": "Venta VE-1 confirmada por $ 5.000,00. Podés consultar su detalle en Historial o iniciar otra venta.",
+        "historialTrasConfirmar": "VE-1 | 21/10/2026, 10:45:33 | Ana Gómez | $ 5.000,00 | Ver detalle",
+        "historialVacioOculto": true,
+        "trasRecarga": {
+          "historialFilas": 1,
+          "historial": "VE-1 | 21/10/2026, 10:45:33 | Ana Gómez | $ 5.000,00 | Ver detalle",
+          "ventasEnAlmacenamiento": 1,
+          "venta": {
+            "id": "VE-1",
+            "totalCentavos": 500000,
+            "renglones": [
+              {
+                "libroId": "LI-7",
+                "cantidad": 2,
+                "precioUnitarioCentavos": 150000,
+                "subtotalCentavos": 300000
+              },
+              {
+                "libroId": "LI-8",
+                "cantidad": 1,
+                "precioUnitarioCentavos": 200000,
+                "subtotalCentavos": 200000
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "description": "Recarga general: 6+3 semillas sin duplicar, altas LI-7/LI-8/CL-4 y venta VE-1 presentes; borrador no persiste",
+      "status": "PASS",
+      "observed": {
+        "recargaGeneral": {
+          "libros": [
+            "LI-1",
+            "LI-2",
+            "LI-3",
+            "LI-4",
+            "LI-5",
+            "LI-6",
+            "LI-7",
+            "LI-8"
+          ],
+          "clientes": [
+            "CL-1",
+            "CL-2",
+            "CL-3",
+            "CL-4"
+          ],
+          "librosUnicos": true,
+          "clientesUnicos": true,
+          "semillasLibros": true,
+          "semillasClientes": true,
+          "altasPresentes": true,
+          "historialFilas": 1,
+          "ventasEnAlmacenamiento": 1
+        },
+        "borrador": {
+          "activoAntesDeRecargar": {
+            "renglones": 1,
+            "total": "$ 18.500,00"
+          },
+          "clavesAlmacenamientoConBorrador": [
+            "version",
+            "libros",
+            "clientes",
+            "ventas"
+          ],
+          "borradorEnAlmacenamiento": false,
+          "trasRecarga": {
+            "renglones": 0,
+            "total": "$ 0,00"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "description": "Precio histórico: sólo cambió el precio del catálogo (LI-7 9999, LI-8 8888); el detalle conserva 1500/2000, subtotales 3000,00/2000,00 y total 5000,00",
+      "status": "PASS",
+      "observed": {
+        "precioModificadoEnAlmacenamiento": [
+          {
+            "id": "LI-7",
+            "precio": 9999
+          },
+          {
+            "id": "LI-8",
+            "precio": 8888
+          }
+        ],
+        "catalogoTrasRecarga": [
+          {
+            "id": "LI-7",
+            "titulo": "Prueba E6",
+            "precio": "$ 9.999,00"
+          },
+          {
+            "id": "LI-8",
+            "titulo": "Prueba E6 B",
+            "precio": "$ 8.888,00"
+          }
+        ],
+        "detalleVisible": true,
+        "detalle": "Detalle de VE-121/10/2026, 10:45:33 · Ana Gómez (CL-1) · ana.gomez@ejemplo.comLibroISBNCantidadPrecio unitarioSubtotalPrueba E6 (LI-7)978 950 000 009 72$ 1.500,00$ 3.000,00Prueba E6 B (LI-8)978-950-000-010-31$ 2.000,00$ 2.000,00Total: $ 5.000,00",
+        "detalleFilas": [
+          [
+            "Prueba E6 (LI-7)",
+            "978 950 000 009 7",
+            "2",
+            "$ 1.500,00",
+            "$ 3.000,00"
+          ],
+          [
+            "Prueba E6 B (LI-8)",
+            "978-950-000-010-3",
+            "1",
+            "$ 2.000,00",
+            "$ 2.000,00"
+          ]
+        ],
+        "detalleTotal": "Total: $ 5.000,00",
+        "ventasEnAlmacenamiento": [
+          {
+            "libroId": "LI-7",
+            "precioUnitarioCentavos": 150000,
+            "subtotalCentavos": 300000,
+            "totalCentavos": 300000
+          },
+          {
+            "libroId": "LI-8",
+            "precioUnitarioCentavos": 200000,
+            "subtotalCentavos": 200000,
+            "totalCentavos": 200000
+          }
+        ],
+        "totalVentaAlmacenado": 500000
+      }
+    },
+    {
+      "id": 8,
+      "description": "Tab con foco visible (outline 3px) y sin scroll horizontal a 320/1280 px en las 5 vistas; desborde de tablas absorbido por .table-wrap",
+      "status": "PASS",
+      "observed": {
+        "tab": [
+          {
+            "tag": "A",
+            "id": null,
+            "name": "Saltar al contenido principal",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "A",
+            "id": null,
+            "name": "PS\n          Librería Páginas del Sol",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "A",
+            "id": null,
+            "name": "Catálogo",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "A",
+            "id": null,
+            "name": "Libros",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "A",
+            "id": null,
+            "name": "Clientes",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "A",
+            "id": null,
+            "name": "Ventas",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "A",
+            "id": null,
+            "name": "Historial",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "INPUT",
+            "id": "busqueda-titulo",
+            "name": "",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "BUTTON",
+            "id": null,
+            "name": "Buscar libros",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "BUTTON",
+            "id": "limpiar-busqueda",
+            "name": "Mostrar todo el catálogo",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "INPUT",
+            "id": "libro-titulo",
+            "name": "",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "INPUT",
+            "id": "libro-isbn",
+            "name": "",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "INPUT",
+            "id": "libro-precio",
+            "name": "",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "SELECT",
+            "id": "libro-editorial",
+            "name": "Seleccione una editorial…Editorial CordilleraEdi",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "SELECT",
+            "id": "libro-genero",
+            "name": "Sin clasificarNovelaEnsayo",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          {
+            "tag": "INPUT",
+            "id": "libro-autor-AU-1",
+            "name": "",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          }
+        ],
+        "tabResumen": {
+          "paradas": 16,
+          "conFocoVisibleOutline3px": 16,
+          "primera": {
+            "tag": "A",
+            "id": null,
+            "name": "Saltar al contenido principal",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          },
+          "segunda": {
+            "tag": "A",
+            "id": null,
+            "name": "PS\n          Librería Páginas del Sol",
+            "focusVisible": true,
+            "outlineStyle": "solid",
+            "outlineWidth": "3px",
+            "outlineOffset": "2px"
+          }
+        },
+        "anchos320": {
+          "base": {
+            "scrollWidth": 305,
+            "innerWidth": 320,
+            "clientWidth": 305
+          },
+          "vistas": {
+            "catalogo": {
+              "hash": "#catalogo",
+              "scrollWidth": 305,
+              "innerWidth": 320,
+              "clientWidth": 305,
+              "visible": true
+            },
+            "libros": {
+              "hash": "#libros",
+              "scrollWidth": 305,
+              "innerWidth": 320,
+              "clientWidth": 305,
+              "visible": true
+            },
+            "clientes": {
+              "hash": "#clientes",
+              "scrollWidth": 305,
+              "innerWidth": 320,
+              "clientWidth": 305,
+              "visible": true
+            },
+            "ventas": {
+              "hash": "#ventas",
+              "scrollWidth": 305,
+              "innerWidth": 320,
+              "clientWidth": 305,
+              "visible": true
+            },
+            "historial": {
+              "hash": "#historial",
+              "scrollWidth": 305,
+              "innerWidth": 320,
+              "clientWidth": 305,
+              "visible": true
+            }
+          },
+          "tablas": [
+            {
+              "indice": 0,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 273,
+              "wrapScrollWidth": 589,
+              "tableScrollWidth": 588,
+              "desbordeAbsorbidoPorWrap": true
+            },
+            {
+              "indice": 1,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 273,
+              "wrapScrollWidth": 313,
+              "tableScrollWidth": 312,
+              "desbordeAbsorbidoPorWrap": true
+            },
+            {
+              "indice": 2,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 239,
+              "wrapScrollWidth": 532,
+              "tableScrollWidth": 532,
+              "desbordeAbsorbidoPorWrap": true
+            },
+            {
+              "indice": 3,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 273,
+              "wrapScrollWidth": 402,
+              "tableScrollWidth": 402,
+              "desbordeAbsorbidoPorWrap": true
+            }
+          ]
+        },
+        "anchos1280": {
+          "base": {
+            "scrollWidth": 1265,
+            "innerWidth": 1280,
+            "clientWidth": 1265
+          },
+          "vistas": {
+            "catalogo": {
+              "hash": "#catalogo",
+              "scrollWidth": 1265,
+              "innerWidth": 1280,
+              "clientWidth": 1265,
+              "visible": true
+            },
+            "libros": {
+              "hash": "#libros",
+              "scrollWidth": 1265,
+              "innerWidth": 1280,
+              "clientWidth": 1265,
+              "visible": true
+            },
+            "clientes": {
+              "hash": "#clientes",
+              "scrollWidth": 1265,
+              "innerWidth": 1280,
+              "clientWidth": 1265,
+              "visible": true
+            },
+            "ventas": {
+              "hash": "#ventas",
+              "scrollWidth": 1265,
+              "innerWidth": 1280,
+              "clientWidth": 1265,
+              "visible": true
+            },
+            "historial": {
+              "hash": "#historial",
+              "scrollWidth": 1265,
+              "innerWidth": 1280,
+              "clientWidth": 1265,
+              "visible": true
+            }
+          },
+          "tablas": [
+            {
+              "indice": 0,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 1168,
+              "wrapScrollWidth": 1168,
+              "tableScrollWidth": 1168,
+              "desbordeAbsorbidoPorWrap": false
+            },
+            {
+              "indice": 1,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 1168,
+              "wrapScrollWidth": 1168,
+              "tableScrollWidth": 1168,
+              "desbordeAbsorbidoPorWrap": false
+            },
+            {
+              "indice": 2,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 1118,
+              "wrapScrollWidth": 1118,
+              "tableScrollWidth": 1118,
+              "desbordeAbsorbidoPorWrap": false
+            },
+            {
+              "indice": 3,
+              "wrapOverflowX": "auto",
+              "wrapClientWidth": 1168,
+              "wrapScrollWidth": 1168,
+              "tableScrollWidth": 1168,
+              "desbordeAbsorbidoPorWrap": false
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "extras": [
+    {
+      "id": "extra-1",
+      "description": "Primera apertura con perfil nuevo y clave inexistente crea paginas-del-sol.estado.v1 con las semillas",
+      "status": "PASS",
+      "observed": {
+        "keyCreated": true,
+        "version": 1,
+        "libros": [
+          "LI-1",
+          "LI-2",
+          "LI-3",
+          "LI-4",
+          "LI-5",
+          "LI-6"
+        ],
+        "clientes": [
+          "CL-1",
+          "CL-2",
+          "CL-3"
+        ],
+        "ventas": 0
+      }
+    },
+    {
+      "id": "extra-2",
+      "description": "Borrado de la clave + recarga vuelve a las semillas (6 libros, 3 clientes, 0 ventas)",
+      "status": "PASS",
+      "observed": {
+        "claveTrasBorrarAntesDeRecargar": null,
+        "version": 1,
+        "libros": 6,
+        "clientes": 3,
+        "ventas": 0,
+        "librosIds": [
+          "LI-1",
+          "LI-2",
+          "LI-3",
+          "LI-4",
+          "LI-5",
+          "LI-6"
+        ],
+        "clientesIds": [
+          "CL-1",
+          "CL-2",
+          "CL-3"
+        ],
+        "dom": {
+          "librosFilas": 6,
+          "clientesFilas": 3,
+          "historialFilas": 0,
+          "historialVacio": true,
+          "ventaTotal": "$ 0,00",
+          "ventaRenglones": 0
+        }
+      }
+    },
+    {
+      "id": "extra-3",
+      "description": "Consola sin errores ni advertencias y sin solicitudes de red externas durante toda la sesión",
+      "status": "PASS",
+      "observed": {
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "exceptions": 0,
+        "logErrorsWarnings": 0,
+        "solicitudesTotales": 130,
+        "externas": 0,
+        "solicitudesUnicas": [
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+          "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js"
+        ]
+      }
+    }
+  ],
+  "finalStored": {
+    "version": 1,
+    "libros": [
+      {
+        "id": "LI-1",
+        "titulo": "El viento del Aconcagua",
+        "isbn": "978-950-000-001-1",
+        "precio": 18500,
+        "editorialId": "ED-1",
+        "generoId": "GE-1",
+        "autorIds": [
+          "AU-1"
+        ]
+      },
+      {
+        "id": "LI-2",
+        "titulo": "Crónicas del agua y la piedra",
+        "isbn": "978-950-000-002-8",
+        "precio": 15200.5,
+        "editorialId": "ED-2",
+        "generoId": "GE-2",
+        "autorIds": [
+          "AU-2"
+        ]
+      },
+      {
+        "id": "LI-3",
+        "titulo": "La casa de los viñedos",
+        "isbn": "978-950-000-003-5",
+        "precio": 21000,
+        "editorialId": "ED-2",
+        "generoId": "GE-1",
+        "autorIds": [
+          "AU-1",
+          "AU-3"
+        ]
+      },
+      {
+        "id": "LI-4",
+        "titulo": "Pensar la ciudad",
+        "isbn": "978-950-000-004-2",
+        "precio": 12750,
+        "editorialId": "ED-1",
+        "generoId": "GE-2",
+        "autorIds": [
+          "AU-3"
+        ]
+      },
+      {
+        "id": "LI-5",
+        "titulo": "Cuaderno de viaje",
+        "isbn": "978-950-000-005-9",
+        "precio": 9900,
+        "editorialId": "ED-1",
+        "generoId": null,
+        "autorIds": [
+          "AU-2"
+        ]
+      },
+      {
+        "id": "LI-6",
+        "titulo": "Noches de vendimia",
+        "isbn": "978-950-000-006-6",
+        "precio": 16300,
+        "editorialId": "ED-2",
+        "generoId": "GE-1",
+        "autorIds": [
+          "AU-2",
+          "AU-3"
+        ]
+      }
+    ],
+    "clientes": [
+      {
+        "id": "CL-1",
+        "nombreCompleto": "Ana Gómez",
+        "email": "ana.gomez@ejemplo.com"
+      },
+      {
+        "id": "CL-2",
+        "nombreCompleto": "Bruno Pérez",
+        "email": "bruno.perez@ejemplo.com"
+      },
+      {
+        "id": "CL-3",
+        "nombreCompleto": "Carla Sosa",
+        "email": "carla.sosa@ejemplo.com"
+      }
+    ],
+    "ventas": []
+  },
+  "console": {
+    "errors": [],
+    "warnings": [],
+    "exceptions": [],
+    "logErrorsWarnings": []
+  },
+  "network": {
+    "requests": [
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/css/styles.css",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/datos.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/utilidades.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/catalogo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/navegacion.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/libros.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/clientes.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas-modelo.js",
+      "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/js/ventas.js"
+    ],
+    "external": [],
+    "total": 130
+  },
+  "browser": "156.0.8078.47",
+  "status": "PASS",
+  "stepErrors": [],
+  "timestamp": "2026-10-21T13:45:36.684Z",
+  "head": "945ffbd",
+  "url": "file:///C:/Users/ezeme/OneDrive/Desktop/Parcial1-Front/UTN-PROG3_TP-INTEGRADOR/index.html"
+}

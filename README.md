@@ -95,7 +95,10 @@ docs/prompts.md        Prompts usados con IA
 
 ### Qué queda pendiente
 
-- No quedan ejercicios pendientes dentro del alcance actual del frontend.
+- No quedan ejercicios pendientes dentro del alcance actual del frontend: los
+  seis están implementados y los casos manuales del Ejercicio 6 fueron
+  verificados el 21/10/2026 (ver «Casos manuales E6 (verificados el
+  21/10/2026)», al final de este documento).
 
 ## Ejercicio 3 · Datos locales, catálogo y filtro
 
@@ -335,6 +338,9 @@ la prueba pedagógica:
 4. La venta debe seguir mostrando subtotales $ 3000,00 y $ 2000,00, y total
    $ 5000,00, aunque el catálogo muestre el precio modificado.
 
+Ese procedimiento se verificó en navegador el 21/10/2026 (caso «Precio
+histórico» de la sección siguiente).
+
 ### Evidencia automatizada E6
 
 La suite CJS se ejecutó el 21/10/2026 con:
@@ -348,23 +354,35 @@ pruebas de `tests/persistencia.test.cjs` comprobaron: primera carga, restauraci�
 válida, recuperación de JSON inválido, recarga sin duplicar semillas, altas de
 libro/cliente, venta de $ 5000,00 y precio histórico tras modificar únicamente
 el catálogo persistido. Las 17 pruebas E3-E5 existentes también se mantuvieron
-verdes.
+verdes. La suite no sustituye la comprobación en navegador: esa validación de
+navegador se registra en la sección siguiente.
 
-### Casos manuales E6 pendientes de ejecución local
+### Casos manuales E6 (verificados el 21/10/2026)
 
-La suite CJS no reemplaza una comprobación en navegador. La automatización
-disponible para esta revisión bloqueó las URL `file://`; por eso **no se declara
-como aprobada** una validación visual ni de teclado. Antes de entregar, abrí
-`index.html` con doble clic, usá una copia limpia del navegador y registrá el
-resultado observado de los siguientes casos:
+La verificación se ejecutó el **21/10/2026** con **Chrome headless
+156.0.8078.47** controlado por **CDP** sobre `file://` (sin servidor ni npm),
+con un **perfil aislado** del navegador. El baseline
+`node --test tests/*.test.cjs` previo a la sesión, con Node 22, fue **22/22**.
+`localStorage` resultó disponible en `file://` y persistente tras
+`Page.reload` (JSON idéntico de 1180 caracteres). La evidencia completa de la
+sesión quedó en
+`openspec/changes/archive/2026-10-21-e6-persistencia-localstorage-pruebas/browser-persistencia-e6.json`.
 
-| Caso | Resultado esperado |
-|------|--------------------|
-| Búsqueda | Mayúsculas/minúsculas, vacía e inexistente conservan el comportamiento E3 |
-| ISBN | Duplicado rechazado y alta válida persistida tras recargar |
-| Email | Inválido y duplicado sin importar mayúsculas rechazados; alta válida persistida |
-| Venta inválida | No agrega ni guarda ventas con cliente/libro/cantidad inválidos o duplicados |
-| Venta válida | $ 1500 × 2 + $ 2000 × 1 conserva subtotales $ 3000/$ 2000 y total $ 5000 |
-| Recarga | No duplica los seis libros ni los tres clientes iniciales |
-| Precio histórico | Sigue el procedimiento anterior y conserva los importes históricos |
-| Accesibilidad y tamaños | Tab/foco visible y 320/1280 px sin desplazamiento horizontal de página |
+| Caso | Resultado esperado | Resultado observado |
+|------|--------------------|---------------------|
+| Búsqueda | Mayúsculas/minúsculas, vacía e inexistente conservan el comportamiento E3 | `"  VIEN "` → «1 libro coincide con «VIEN».» (1 coincidencia); vacía → 6 tarjetas («Mostrando los 6 libros del catálogo.»); «zzz inexistente» → 0 tarjetas con «Sin resultados: ningún título contiene «zzz inexistente». Probá con otra palabra o borrá la búsqueda.»; mismo comportamiento tras recarga |
+| ISBN | Duplicado rechazado y alta válida persistida tras recargar | Duplicado `978-950-000-001-1` rechazado («El ISBN ya está registrado: al comparar se ignoran espacios, guiones y mayúsculas.», sigue en 6 filas); altas válidas «Prueba E6» (` 978 950 000 009 7 `, precio 1500) → **LI-7** y «Prueba E6 B» (2000) → **LI-8**; tras recarga: 8 filas LI-1…LI-8 en DOM y storage |
+| Email | Inválido y duplicado sin importar mayúsculas rechazados; alta válida persistida | `ana@sin-dominio` rechazado («El email no tiene un formato válido (ejemplo: nombre@dominio.com).»); `ANA.GOMEZ@EJEMPLO.COM` rechazado («El email ya está registrado: al comparar se ignoran espacios y mayúsculas.»); «Prueba E6 Cliente» (`prueba.e6@ejemplo.com`) → **CL-4**, persistido tras recarga (4 filas) |
+| Venta inválida | No agrega ni guarda ventas con cliente/libro/cantidad inválidos o duplicados | Sin cliente / sin renglones → «Debe seleccionar un cliente existente.» / «Agregá al menos un libro a la venta.»; cantidades 0 / −2 / 1.5 → «Renglón 1: la cantidad debe ser un entero mayor que cero y seguro.» (`aria-invalid`); libro repetido → «Renglón 2: el libro ya está en la venta; modificá su cantidad.»; tras recarga: 0 ventas, historial vacío |
+| Venta válida | $ 1500 × 2 + $ 2000 × 1 conserva subtotales $ 3000/$ 2000 y total $ 5000 | LI-7×2 ($ 1.500,00 → $ 3.000,00) + LI-8×1 ($ 2.000,00 → $ 2.000,00), total **$ 5.000,00**; «Venta **VE-1** confirmada por $ 5.000,00. Podés consultar su detalle en Historial o iniciar otra venta.»; fila «VE-1 \| 21/10/2026, 10:45:33 \| Ana Gómez \| $ 5.000,00 \| Ver detalle»; persiste tras recarga (`totalCentavos` 500000) |
+| Recarga | No duplica los seis libros ni los tres clientes iniciales | 8 libros LI-1…LI-8 únicos y 4 clientes CL-1…CL-4 únicos (semillas sin duplicar, altas presentes); VE-1 en historial; el borrador no se persiste (claves storage: `version`, `libros`, `clientes`, `ventas`) |
+| Precio histórico | Sigue el procedimiento anterior y conserva los importes históricos | Modificando **sólo** `libros[].precio` en el storage (LI-7→9999, LI-8→8888), el catálogo tras recarga muestra **$ 9.999,00** y **$ 8.888,00**; el detalle de VE-1 conserva LI-7 c=2 **$ 1.500,00 / $ 3.000,00**, LI-8 c=1 **$ 2.000,00 / $ 2.000,00** y **Total: $ 5.000,00** (storage de la venta intacto) |
+| Accesibilidad y tamaños | Tab/foco visible y 320/1280 px sin desplazamiento horizontal de página | Tab con 16/16 paradas focales visibles (`:focus-visible`, outline 3px); **320 px**: `scrollWidth 305 = clientWidth 305` en las 5 vistas (#catalogo, #libros, #clientes, #ventas, #historial), los `.table-wrap` absorben el desborde (wrap 273 vs tabla 588 px); **1280 px**: `scrollWidth 1265 = clientWidth 1265` en las 5 vistas |
+| Extra · Inicialización | La primera apertura crea la clave con las semillas | Primera apertura en perfil nuevo crea `paginas-del-sol.estado.v1` con 6 libros, 3 clientes y 0 ventas |
+| Extra · Reinicio | Borrar la clave y recargar restaura las semillas | `removeItem` + recarga restaura 6 libros, 3 clientes y 0 ventas |
+| Extra · Consola y red | Consola sin errores ni advertencias y sin solicitudes externas | 0 errores / 0 advertencias; 130 solicitudes, todas `file://`, 0 externas |
+
+El caso de precio histórico se replicó **siguiendo el procedimiento de la
+consigna** (modificar sólo el precio del catálogo persistido y recargar). La
+comprobación guiada por el docente en una copia del proyecto sigue siendo
+parte de la entrega; el comportamiento observado coincide con lo pedido.
